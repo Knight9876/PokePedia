@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokémon Moves</title>
+    <link rel="icon" type="image" href="../../../assets/icon3.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../style.css" />
+    <link rel="stylesheet" href="./typeChart.css" />
+    <script
+      src="https://kit.fontawesome.com/2fa914bebf.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="background">
+      <div class="bg-img">
+        <img src="../../..//assets/bg-img.png" alt="" />
+        <img src="../../../assets/bg-img.png" alt="" />
+        <img src="../../../assets/bg-img.png" alt="" />
+        <img src="../../../assets/bg-img.png" alt="" />
+        <img src="../../../assets/bg-img.png" alt="" />
+        <img src="../../../assets/bg-img.png" alt="" />
+        <img src="../../../assets/bg-img.png" alt="" />
+        <img src="../../../assets/bg-img.png" alt="" />
+      </div>
+    </div>
+    <div class="blur"></div>
+
+    <div id="loader">
+      
+    </div>
+
+    <div class="back">
+      <i class="fa-solid fa-arrow-left"></i>
+    </div>
+
+    <div id="open-menu">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+
+    <div id="close-menu">
+      <i class="fa-solid fa-xmark"></i>
+    </div>
+
+    <div id="menu-list" class="hide">
+      <button type="button" onclick="location.href='../../pokedex.html'">
+        Pokédex
+      </button>
+
+      <button type="button" onclick="location.href='../../../Moves/Moves.html'">
+        Moves
+      </button>
+
+      <button type="button" onclick="location.href='../../../Ability/Ability.html'">
+        Abilities
+      </button>
+
+      <button type="button" onclick="location.href='../../../Items/Items.html'">
+        Items
+      </button>
+
+      <button type="button" onclick="location.href='../../../Location/Location.html'">
+        Location
+      </button>
+
+      <button
+        type="button"
+        onclick="location.href='../../../TypeChart/TypeChart.html'"
+      >
+        Type Chart
+      </button>
+
+      <button type="button" onclick="location.href='../../../Compare/Compare.html'">
+        Compare
+      </button>
+    </div>
+
+    <div class="main-container">
+      <div class="type-container">
+        <h3>Pokémon: Charizard</h3>
+        <div>
+          <h3 style="text-align: left">Damage Dealt:</h3>
+          <br />
+          <div class="type">
+            <table id="type-chart">
+              <thead>
+                <tr>
+                  <th style="background-color: grey">Normal</th>
+                  <th style="background-color: red">Fighting</th>
+                  <th style="background-color: rgb(0, 183, 255)">Flying</th>
+                  <th style="background-color: purple">Poison</th>
+                  <th style="background-color: #a0522d">Ground</th>
+                  <th style="background-color: #8b0000">Rock</th>
+                  <th style="background-color: yellowgreen">Bug</th>
+                  <th style="background-color: rgb(49, 0, 72)">Ghost</th>
+                  <th style="background-color: rgb(93, 93, 93)">Steel</th>
+                  <th style="background-color: rgb(255, 98, 0)">Fire</th>
+                  <th style="background-color: blue">Water</th>
+                  <th style="background-color: green">Grass</th>
+                  <th style="background-color: yellow">Electric</th>
+                  <th style="background-color: rgb(255, 0, 132)">Psychic</th>
+                  <th style="background-color: cyan">Ice</th>
+                  <th style="background-color: rgb(100, 0, 171)">Dragon</th>
+                  <th style="background-color: black">Dark</th>
+                  <th style="background-color: hotpink">Fairy</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr id="damage-dealt-row"></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div>
+          <h3 style="text-align: left">Damage Taken:</h3>
+          <br />
+          <div class="type">
+            <table id="type-chart">
+              <thead>
+                <tr>
+                  <th style="background-color: grey">Normal</th>
+                  <th style="background-color: red">Fighting</th>
+                  <th style="background-color: rgb(0, 183, 255)">Flying</th>
+                  <th style="background-color: purple">Poison</th>
+                  <th style="background-color: #a0522d">Ground</th>
+                  <th style="background-color: #8b0000">Rock</th>
+                  <th style="background-color: yellowgreen">Bug</th>
+                  <th style="background-color: rgb(49, 0, 72)">Ghost</th>
+                  <th style="background-color: rgb(93, 93, 93)">Steel</th>
+                  <th style="background-color: rgb(255, 98, 0)">Fire</th>
+                  <th style="background-color: blue">Water</th>
+                  <th style="background-color: green">Grass</th>
+                  <th style="background-color: yellow">Electric</th>
+                  <th style="background-color: rgb(255, 0, 132)">Psychic</th>
+                  <th style="background-color: cyan">Ice</th>
+                  <th style="background-color: rgb(100, 0, 171)">Dragon</th>
+                  <th style="background-color: black">Dark</th>
+                  <th style="background-color: hotpink">Fairy</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr id="damage-taken-row"></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="typeChart.js" type="module"></script>
+  </body>
+</html>

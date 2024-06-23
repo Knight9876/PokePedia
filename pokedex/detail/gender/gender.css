@@ -1,0 +1,98 @@
+* {
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-family: "Orbitron", sans-serif;
+}
+
+.fa-solid {
+    font-size: 2rem;
+    top: 30%;
+    left: 5.4%;
+    cursor: pointer;
+}
+
+.back {
+    position: absolute;
+    top: 5.5%;
+    left: 1.5%;
+    z-index: 99;
+}
+
+#open-menu,
+#close-menu {
+    position: absolute;
+    top: 12%;
+    left: 1.5%;
+    z-index: 1;
+}
+
+#close-menu {
+    left: 1.63%;
+    visibility: hidden;
+}
+
+#menu-list {
+    z-index: 2;
+    position: absolute;
+    border: 0.2rem ridge white;
+    top: 16%;
+    width: 14%;
+    height: max-content;
+    background-color: black;
+    display: grid;
+    grid-template-columns: repeat(1, fr);
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+    gap: 2rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(1rem);
+    border-radius: 0.5rem;
+}
+
+.hide {
+    position: absolute;
+    left: -16%;
+    transition: 0.1s ease-in-out;
+}
+
+.show {
+    position: absolute;
+    left: 0%;
+}
+
+button {
+    font-size: 1rem;
+    padding: 1rem 2rem;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+}
+
+#gender {
+    position: absolute;
+    display: flex;
+    justify-content: space-evenly;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    
+}
+
+.shiny {
+    display: flex;
+    justify-content: flex-end;
+}
+
+p {
+    margin-top: 2rem;
+    font-size: 2.5rem;
+    font-weight: bold;
+    letter-spacing: 0.2rem;
+    text-align: center;
+}
+
+/* #male, #female {
+    width: 200%;
+} */

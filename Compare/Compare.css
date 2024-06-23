@@ -1,0 +1,283 @@
+* {
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-family: "Orbitron", sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+}
+
+.main-container {
+    animation: fadeIn 0.5s ease forwards;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.fa-solid {
+    font-size: 2rem;
+    position: absolute;
+    top: 30%;
+    left: 5.4%;
+    cursor: pointer;
+}
+
+.back {
+    position: absolute;
+    top: 5.5%;
+    left: 1.5%;
+    z-index: 99;
+}
+
+#open-menu,
+#close-menu {
+    position: absolute;
+    top: 12%;
+    left: 1.5%;
+    z-index: 1;
+}
+
+#close-menu {
+    left: 1.63%;
+    visibility: hidden;
+}
+
+#menu-list {
+    z-index: 2;
+    position: absolute;
+    border: 0.2rem ridge white;
+    top: 16%;
+    width: 14%;
+    height: max-content;
+    background-color: black;
+    display: grid;
+    grid-template-columns: repeat(1, fr);
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+    gap: 2rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(1rem);
+    border-radius: 0.5rem;
+}
+
+.hide {
+    position: absolute;
+    left: -16%;
+    transition: 0.1s ease-in-out;
+}
+
+.show {
+    position: absolute;
+    left: 0%;
+}
+
+button {
+    font-size: 1rem;
+    padding: 1rem 2rem;
+    letter-spacing: 0.2rem;
+}
+
+.fa-filter {
+    left: 97.2%;
+    top: 5.4%;
+    cursor: pointer;
+    z-index: 99;
+}
+
+#drop-down {
+    position: absolute;
+    top: 10%;
+    border: 0.1rem white solid;
+    font-size: 1.5rem;
+    padding: 1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-radius: 1rem;
+    letter-spacing: 0.1rem;
+    z-index: 3;
+    backdrop-filter: blur(1rem);
+}
+
+.hide-drop-down {
+    position: absolute;
+    right: -15%;
+    transition: 0.1s ease-in-out;
+}
+
+.show-drop-down {
+    position: absolute;
+    right: 0;
+}
+
+input[type=radio],
+label {
+    cursor: pointer;
+    font-weight: normal;
+    text-transform: none;
+}
+
+#compare {
+    z-index: 99;
+    position: absolute;
+    top: 0;
+    right: 5%;
+    width: 90%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: center;
+    justify-content: center;
+    gap: 2rem;
+    align-items: center;
+    padding: 1rem;
+    box-sizing: border-box;
+    overflow-x: auto;
+    text-shadow: 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black;
+}
+
+.compare-container {
+    border: 0.1px solid white;
+    border-radius: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(1rem);
+    padding: 1rem;
+    box-shadow: 0 0 3px white;
+}
+
+.compare-container img {
+    width: 30%;
+    margin-bottom: 1.5rem;
+}
+
+.pokemon-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    margin: 1rem;
+    gap: 1rem;
+}
+
+.image-type {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.image-type img {
+    width: 10%;
+    margin: 0;
+    box-shadow: 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black;
+    border-radius: 50%;
+}
+
+.fa-mars,
+.fa-venus {
+    position: relative;
+    font-size: 1.3rem;
+}
+
+.gender {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat-container {
+    display: flex;
+    margin: 0.5rem 0;
+}
+
+.stat-name {
+    flex: 1;
+    color: white;
+}
+
+.progress-bar {
+    flex: 3;
+    border-radius: 5px;
+    overflow: hidden;
+    border: 0.2rem ridge white;
+}
+
+.progress {
+    background-color: white;
+    padding: 0.1rem;
+    text-align: center;
+    color: black;
+    font-weight: 1000;
+    max-width: 100%;
+    width: 0;
+    animation: slide-in 1s forwards;
+    text-shadow: none;
+}
+
+#type-chart {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 100%;
+    text-align: center;
+}
+
+th,
+td {
+    border: 0.2rem ridge white;
+    padding: 0.7rem;
+    backdrop-filter: blur(1rem);
+    text-shadow: 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black;
+}
+
+th img {
+    width: 30%;
+}
+
+table {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.type-effective {
+    display: flex;
+    font-size: 0.8rem;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.type-item {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    
+    
+}
+
+.type-item img {
+    box-shadow: 0 0 3px black, 0 0 3px black, 0 0 3px black, 0 0 3px black;
+    border-radius: 50%;
+    width: 1rem;
+    margin: 0;
+}
+
+@keyframes slide-in {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: var(--progress-width);
+    }
+}
+
+#compare::-webkit-scrollbar {
+    display: none;
+}

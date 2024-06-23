@@ -1,0 +1,215 @@
+* {
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-family: "Orbitron", sans-serif;
+}
+
+.fa-solid {
+    font-size: 2rem;
+    position: absolute;
+    top: 30%;
+    left: 5.4%;
+    cursor: pointer;
+}
+
+.back {
+    position: absolute;
+    top: 5.5%;
+    left: 1.5%;
+    z-index: 99;
+}
+
+#open-menu,
+#close-menu {
+    position: absolute;
+    top: 12%;
+    left: 1.5%;
+    z-index: 1;
+}
+
+#close-menu {
+    left: 1.63%;
+    visibility: hidden;
+}
+
+#menu-list {
+    z-index: 2;
+    position: absolute;
+    border: 0.2rem ridge white;
+    top: 16%;
+    width: 14%;
+    height: max-content;
+    background-color: black;
+    display: grid;
+    grid-template-columns: repeat(1, fr);
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+    gap: 2rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(1rem);
+    border-radius: 0.5rem;
+}
+
+.hide {
+    position: absolute;
+    left: -16%;
+    transition: 0.1s ease-in-out;
+}
+
+.show {
+    position: absolute;
+    left: 0%;
+}
+
+button {
+    font-size: 1rem;
+    padding: 1rem 2rem;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+}
+
+.search {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    margin-top: 2rem;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(1rem);
+    -webkit-backdrop-filter: blur(1rem);
+}
+
+#search-input {
+    width: 90%;
+    font-size: 2rem;
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 0.2rem ridge white;
+    border-radius: 10rem;
+    padding: 1rem;
+    text-align: center;
+    text-transform: capitalize;
+    font-family: "Orbitron", sans-serif;
+    color: white;
+    letter-spacing: 0.2rem;
+}
+
+#clear-search-input {
+    cursor: pointer;
+}
+
+.fa-xmark {
+    left: 93%;
+    top: 29%;
+}
+
+.fa-filter {
+    left: 97.2%;
+    top: 5.4%;
+    cursor: pointer;
+}
+
+#drop-down {
+    position: absolute;
+    top: 10%;
+    border: 0.1rem white solid;
+    font-size: 1.5rem;
+    padding: 1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-radius: 1rem;
+    letter-spacing: 0.1rem;
+    z-index: 3;
+    backdrop-filter: blur(1rem);
+}
+
+.hide-drop-down {
+    position: absolute;
+    right: -15%;
+    transition: 0.1s ease-in-out;
+}
+
+.show-drop-down {
+    position: absolute;
+    right: 0;
+}
+
+input[type=radio], label {
+    cursor: pointer;
+    font-weight: normal;
+    text-transform: none;
+}
+
+input[type=text] {
+    font-weight: normal;
+}
+
+.temp {
+    position: absolute;
+    top: 14%;
+    left: 0;
+    width: 100%;
+    height: 83%;
+    display: flex;
+    justify-content: center;
+}
+
+#pokemon-list {
+    width: 90%;
+    overflow-y: scroll;
+    display: grid;
+    text-align: center;
+    grid-template-columns: repeat(11, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 1rem;
+    align-items: center;
+}
+
+.pokemon-item {
+    border: 0.2rem ridge white;
+    border-radius: 0.4rem;
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(1rem);
+    -webkit-backdrop-filter: blur(1rem);
+    cursor: pointer;
+}
+
+.pokemon-item p {
+    text-transform: capitalize;
+    font-size: 0.8rem;
+    letter-spacing: 0.2rem;
+    border-top: 0.2rem ridge white;
+    padding: 0.5rem 0;
+    font-weight: bold;
+}
+
+#pokemon-list::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+#pokemon-list::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 6px;
+}
+
+#pokemon-list::-webkit-scrollbar-thumb {
+    background: white;
+    border-radius: 6px;
+}
+
+#pokemon-list::-webkit-scrollbar-thumb:hover {
+    background: grey
+}
+
+#loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
+}
+

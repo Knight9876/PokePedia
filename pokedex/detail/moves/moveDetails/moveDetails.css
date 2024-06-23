@@ -1,0 +1,168 @@
+* {
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-family: "Orbitron", sans-serif;
+    letter-spacing: 0.2rem;
+    font-weight: bold;
+}
+
+.container {
+    animation: fadeIn 0.5s ease forwards;
+    text-transform: uppercase;
+    position: absolute;
+    top: 0;
+    width: 96%;
+    height: 100%;
+    right: 0;
+    overflow-y: auto;
+}
+
+.back {
+    position: absolute;
+    top: 3.5%;
+    left: 1.5%;
+    z-index: 99;
+}
+
+#move-details {
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.machine {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    align-items: center;
+    gap: 2rem;
+}
+
+.game {
+    border-radius: 0.5rem;
+    padding: 1rem;
+    font-size: 1rem;
+}
+
+h1 {
+    border-radius: 1rem;
+    width: max-content;
+    padding: 0 1rem 1rem 1rem;
+}
+
+.pokemon-item {
+    border: 0.2rem ridge white;
+    border-radius: 0.4rem;
+    backdrop-filter: blur(1rem);
+    -webkit-backdrop-filter: blur(1rem);
+}
+
+.pokemon-item p {
+    text-transform: capitalize;
+    font-size: 0.8rem;
+    text-shadow: none;
+    letter-spacing: 0.2rem;
+    padding: 0.5rem 0;
+    font-weight: bold;
+    text-align: center;
+}
+
+.pokemon-item img {
+    cursor: pointer;
+}
+
+#pokemon-list {
+    padding: 2rem 1rem;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 1rem;
+}
+
+.type {
+    display: flex;
+    
+    align-items: center;
+    gap: 1rem;
+    
+}
+
+#type-image {
+    
+    width: 3%;
+    top: 13%;
+}
+
+.indent {
+    margin-left: 3.1rem;
+}
+
+.fa-solid {
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+#open-menu,
+#close-menu {
+    position: absolute;
+    top: 10%;
+    left: 1.5%;
+    z-index: 1;
+    cursor: pointer;
+}
+
+#close-menu {
+    left: 1.63%;
+    visibility: hidden;
+}
+
+#menu-list {
+    z-index: 2;
+    position: absolute;
+    border: 0.2rem ridge white;
+    top: 16%;
+    width: 14%;
+    height: max-content;
+    background-color: black;
+    display: grid;
+    grid-template-columns: repeat(1, fr);
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+    gap: 2rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(1rem);
+    border-radius: 0.5rem;
+}
+
+.hide {
+    position: absolute;
+    left: -16%;
+    transition: 0.1s ease-in-out;
+}
+
+.show {
+    position: absolute;
+    left: 0%;
+}
+
+button {
+    font-size: 1rem;
+    padding: 1rem 2rem;
+    letter-spacing: 0.2rem;
+}
+
+.container::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+.container::-webkit-scrollbar-track {
+    border-radius: 6px;
+    background: var(--scrollbar-track-color);
+    border: 0.2rem ridge var(--scrollbar-track-border-color);
+}
+
+.container::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background: var(--scrollbar-thumb-color);
+}

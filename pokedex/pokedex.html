@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokédex</title>
+    <link rel="icon" type="image" href="../assets/icon3.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="./pokedex.css" />
+    <script
+      src="https://kit.fontawesome.com/2fa914bebf.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="background">
+      <div class="bg-img">
+        <img src="../assets/bg-img.png" alt="" />
+        <img src="../assets/bg-img.png" alt="" />
+        <img src="../assets/bg-img.png" alt="" />
+        <img src="../assets/bg-img.png" alt="" />
+        <img src="../assets/bg-img.png" alt="" />
+        <img src="../assets/bg-img.png" alt="" />
+        <img src="../assets/bg-img.png" alt="" />
+        <img src="../assets/bg-img.png" alt="" />
+      </div>
+    </div>
+
+    <div class="blur"></div>
+
+    <div id="loader">
+      <img src="../assets/pokeball-loader.gif" alt="" />
+    </div>
+
+    <div class="main-container">
+      <div class="back">
+        <i class="fa-solid fa-arrow-left"></i>
+      </div>
+
+      <div id="open-menu">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+
+      <div id="close-menu">
+        <i class="fa-solid fa-xmark"></i>
+      </div>
+
+      <div id="menu-list" class="hide">
+        <button type="button" onclick="location.href='./pokedex.html'">
+          Pokédex
+        </button>
+
+        <button type="button" onclick="location.href='../Moves/Moves.html'">
+          Moves
+        </button>
+
+        <button type="button" onclick="location.href='../Ability/Ability.html'">
+          Abilities
+        </button>
+
+        <button type="button" onclick="location.href='../Items/Items.html'">
+          Items
+        </button>
+
+        <button
+          type="button"
+          onclick="location.href='../Location/Location.html'"
+        >
+          Location
+        </button>
+
+        <button
+          type="button"
+          onclick="location.href='../TypeChart/TypeChart.html'"
+        >
+          Type Chart
+        </button>
+
+        <button type="button" onclick="location.href='../Compare/Compare.html'">
+          Compare
+        </button>
+      </div>
+
+      <div class="search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input
+          id="search-input"
+          type="text"
+          placeholder="Enter a Letter....."
+        />
+        <div id="clear-search-input">
+          <i class="fa-solid fa-xmark"></i>
+        </div>
+      </div>
+
+      <div id="filter">
+        <i class="fa-solid fa-filter"></i>
+      </div>
+
+      <div id="drop-down" class="hide-drop-down">
+        <div>
+          <input
+            type="radio"
+            id="allgens"
+            name="filters"
+            value="allgens"
+            checked
+          />
+          <label for="allgens" class="allgens">All</label>
+        </div>
+
+        <div>
+          <input type="radio" name="filters" id="gen1" value="gen1" />
+          <label for="gen1" class="gen1">Gen 1</label>
+        </div>
+
+        <div>
+          <input type="radio" name="filters" id="gen2" value="gen2" />
+          <label for="gen2" class="gen2">Gen 2</label>
+        </div>
+
+        <div>
+          <input type="radio" name="filters" id="gen3" value="gen3" />
+          <label for="gen3" class="gen3">Gen 3</label>
+        </div>
+
+        <div>
+          <input type="radio" name="filters" id="gen4" value="gen4" />
+          <label for="gen4" class="gen4">Gen 4</label>
+        </div>
+
+        <div>
+          <input type="radio" name="filters" id="gen5" value="gen5" />
+          <label for="gen5" class="gen5">Gen 5</label>
+        </div>
+
+        <div>
+          <input type="radio" name="filters" id="gen6" value="gen6" />
+          <label for="gen6" class="gen6">Gen 6</label>
+        </div>
+
+        <div>
+          <input type="radio" name="filters" id="gen7" value="gen7" />
+          <label for="gen7" class="gen7">Gen 7</label>
+        </div>
+
+        <div>
+          <input type="radio" name="filters" id="gen8" value="gen8" />
+          <label for="gen8" class="gen8">Gen 8</label>
+        </div>
+
+        <div>
+          <input type="radio" name="filters" id="gen9" value="gen9" />
+          <label for="gen9" class="gen9">Gen 9</label>
+        </div>
+
+        <div>
+          <input type="radio" name="filters" id="mega" value="mega" />
+          <label for="mega" class="mega">Mega</label>
+        </div>
+
+        <div>
+          <input type="radio" name="filters" id="alola" value="alola" />
+          <label for="alola" class="alola">Alola</label>
+        </div>
+
+        <div>
+          <input type="radio" name="filters" id="galar" value="galar" />
+          <label for="galar" class="galar">Galar</label>
+        </div>
+
+        <div>
+          <input type="radio" name="filters" id="hisui" value="hisui" />
+          <label for="hisui" class="hisui">Hisui</label>
+        </div>
+
+        <div>
+          <input type="radio" name="filters" id="gmax" value="gmax" />
+          <label for="gmax" class="gmax">Gmax</label>
+        </div>
+      </div>
+
+      <div class="temp">
+        <div id="pokemon-list"></div>
+      </div>
+    </div>
+    <script src="./pokedex.js"></script>
+  </body>
+</html>

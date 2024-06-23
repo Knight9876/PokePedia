@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokémon Moves</title>
+    <link rel="icon" type="image" href="../assets/icon3.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../pokedex/detail/location/location.css" />
+    <link rel="stylesheet" href="../pokedex/pokedex.css" />
+    <script
+      src="https://kit.fontawesome.com/2fa914bebf.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="background">
+      <div class="bg-img">
+        <img src="../../..//assets/bg-img.png" alt="" />
+        <img src="../../../assets/bg-img.png" alt="" />
+        <img src="../../../assets/bg-img.png" alt="" />
+        <img src="../../../assets/bg-img.png" alt="" />
+        <img src="../../../assets/bg-img.png" alt="" />
+        <img src="../../../assets/bg-img.png" alt="" />
+        <img src="../../../assets/bg-img.png" alt="" />
+        <img src="../../../assets/bg-img.png" alt="" />
+      </div>
+    </div>
+    <div class="blur"></div>
+
+    <div id="loader">
+      <img src="../../../assets/pokeball-loader.gif" alt="" />
+    </div>
+
+    <div class="back">
+      <i class="fa-solid fa-arrow-left"></i>
+    </div>
+
+    <div id="open-menu">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+
+    <div id="close-menu">
+      <i class="fa-solid fa-xmark"></i>
+    </div>
+
+    <div id="menu-list" class="hide">
+      <button type="button" onclick="location.href='../pokedex/pokedex.html'">
+        Pokédex
+      </button>
+
+      <button type="button" onclick="location.href='../Moves/Moves.html'">
+        Moves
+      </button>
+
+      <button type="button" onclick="location.href='../Ability/Ability.html'">
+        Abilities
+      </button>
+
+      <button type="button" onclick="location.href='../Items/Items.html'">
+        Items
+      </button>
+
+      <button type="button" onclick="location.href='./Location.html'">
+        Location
+      </button>
+
+      <button
+        type="button"
+        onclick="location.href='../TypeChart/TypeChart.html'"
+      >
+        Type Chart
+      </button>
+
+      <button type="button" onclick="location.href='../Compare/Compare.html'">
+        Compare
+      </button>
+    </div>
+
+    <div class="search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input id="search-input" type="text" placeholder="Enter a Letter....." />
+      <div id="clear-search-input">
+        <i class="fa-solid fa-xmark"></i>
+      </div>
+    </div>
+
+    <div id="filter">
+      <i class="fa-solid fa-filter"></i>
+    </div>
+
+    <div id="drop-down" class="hide-drop-down">
+      <div>
+        <input
+          type="radio"
+          id="allLocation"
+          name="filters"
+          value="allLocation"
+          checked
+        />
+        <label for="allLocation" class="allLocation">All</label>
+      </div>
+    </div>
+    <div
+      class="main-container"
+      style="
+        width: 93%;
+        height: 88%;
+        top: 13%;
+        left: 50%;
+        transform: translate(-50%, 0);
+      "
+    >
+      <div class="location"></div>
+    </div>
+    <script src="location.js" type="module"></script>
+  </body>
+</html>

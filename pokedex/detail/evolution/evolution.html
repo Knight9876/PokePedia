@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokémon Detail</title>
+    <link rel="icon" type="image" href="../../../assets/icon3.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../style.css" />
+    <link rel="stylesheet" href="./evolution.css" />
+    <script
+      src="https://kit.fontawesome.com/2fa914bebf.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="background">
+      <div class="bg-img">
+        <img src="../../../assets/bg-img.png" alt="" />
+        <img src="../../../assets/bg-img.png" alt="" />
+        <img src="../../../assets/bg-img.png" alt="" />
+        <img src="../../../assets/bg-img.png" alt="" />
+        <img src="../../../assets/bg-img.png" alt="" />
+        <img src="../../../assets/bg-img.png" alt="" />
+        <img src="../../../assets/bg-img.png" alt="" />
+        <img src="../../../assets/bg-img.png" alt="" />
+      </div>
+    </div>
+    <div class="blur"></div>
+    <div id="loader">
+      <img src="../../../assets/pokeball-loader.gif" alt="Loading...">
+    </div>
+
+    <div class="back">
+      <i class="fa-solid fa-arrow-left"></i>
+    </div>
+
+    <div id="open-menu">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+
+    <div id="close-menu">
+      <i class="fa-solid fa-xmark"></i>
+    </div>
+
+    <div id="menu-list" class="hide">
+      <button type="button" onclick="location.href='../../pokedex.html'">
+        Pokédex
+      </button>
+
+      <button type="button" onclick="location.href='../../../Moves/Moves.html'">
+        Moves
+      </button>
+
+      <button type="button" onclick="location.href='../../../Ability/Ability.html'">
+        Abilities
+      </button>
+
+      <button type="button" onclick="location.href='../../../Items/Items.html'">
+        Items
+      </button>
+
+      <button type="button" onclick="location.href='../../../Location/Location.html'">
+        Location
+      </button>
+
+      <button
+        type="button"
+        onclick="location.href='../../../TypeChart/TypeChart.html'"
+      >
+        Type Chart
+      </button>
+
+      <button type="button" onclick="location.href='../../../Compare/Compare.html'">
+        Compare
+      </button>
+    </div>
+    
+    <div class="main-container">
+        <div id="pkmn-evo"></div>
+    </div>
+    <script src="evolution.js" type="module"></script>
+  </body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokémon Detail</title>
+    <link rel="icon" type="image" href="../../assets/icon3.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="./detail.css" />
+    <script
+      src="https://kit.fontawesome.com/2fa914bebf.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="background">
+      <div class="bg-img">
+        <img src="../../assets/bg-img.png" alt="" />
+        <img src="../../assets/bg-img.png" alt="" />
+        <img src="../../assets/bg-img.png" alt="" />
+        <img src="../../assets/bg-img.png" alt="" />
+        <img src="../../assets/bg-img.png" alt="" />
+        <img src="../../assets/bg-img.png" alt="" />
+        <img src="../../assets/bg-img.png" alt="" />
+        <img src="../../assets/bg-img.png" alt="" />
+      </div>
+    </div>
+    <div class="blur"></div>
+    <div id="loader">
+      <img src="../../assets/pokeball-loader.gif" alt="Loading..." />
+    </div>
+    <div class="main-container">
+      <div class="buttons">
+        <button type="button" class="evolution-btn" onclick="evolutionPage()">
+          Evolution
+        </button>
+        <button type="button" class="move-btn" onclick="movePage()">
+          Moves
+        </button>
+        <button type="button" class="location-btn" onclick="locationPage()">
+          Location
+        </button>
+        <button type="button" class="abilities-btn" onclick="abilitiesPage()">
+          Abilities
+        </button>
+        <button type="button" class="type-chart-btn" onclick="typeChartPage()">
+          Type Chart
+        </button>
+        <button type="button" class="gender-btn" onclick="genderPage()">
+          Gender
+        </button>
+      </div>
+
+      <div id="pokemon-details">
+        <div class="back">
+          <i class="fa-solid fa-arrow-left"></i>
+        </div>
+
+        <div id="open-menu">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+
+        <div id="close-menu">
+          <i class="fa-solid fa-xmark"></i>
+        </div>
+
+        <div id="menu-list" class="hide">
+          <button type="button" onclick="location.href='../pokedex.html'">
+            Pokédex
+          </button>
+
+          <button
+            type="button"
+            onclick="location.href='../../Moves/Moves.html'"
+          >
+            Moves
+          </button>
+
+          <button
+            type="button"
+            onclick="location.href='../../Ability/Ability.html'"
+          >
+            Abilities
+          </button>
+
+          <button
+            type="button"
+            onclick="location.href='../../Items/Items.html'"
+          >
+            Items
+          </button>
+
+          <button
+            type="button"
+            onclick="location.href='../../Location/Location.html'"
+          >
+            Location
+          </button>
+
+          <button
+            type="button"
+            onclick="location.href='../../TypeChart/TypeChart.html'"
+          >
+            Type Chart
+          </button>
+
+          <button
+            type="button"
+            onclick="location.href='../../Compare/Compare.html'"
+          >
+            Compare
+          </button>
+        </div>
+
+        <div class="name-id-gen-gender">
+          <p id="pokemon-id-gen-species"></p>
+          
+          <h1 id="pokemon-name"></h1>
+          
+          <p id="pokemon-name-other"></p>
+          <p id="pokemon-gender"></p>
+        </div>
+        <div class="shiny-compare">
+          <div id="shiny">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+          </div>
+          <div id="compare">
+            <i class="fa-solid fa-code-compare"></i>
+          </div>
+        </div>
+        <div class="images">
+          <div class="img-bg"></div>
+          <img id="pokemon-image" src="" alt="" />
+          <img id="pokemon-shiny-image" src="" alt="" />
+        </div>
+        <div id="left-right">
+          <i class="fa-solid fa-angle-right left"></i>
+          <i class="fa-solid fa-angle-right right"></i>
+        </div>
+        <br />
+        <div class="types-height-weight-abilities-entry">
+          <p id="pokemon-types"></p>
+          <br />
+          <div class="height-weight-abilities-entry">
+            <p id="pokemon-height-weight"></p>
+            <br />
+            <p id="pokemon-abilities"></p>
+            <br />
+            <p id="pokedex-entry"></p>
+          </div>
+        </div>
+        <div class="stats"></div>
+        <div id="type-effectiveness">
+          
+          <p id="strengths">Strengths:</p>
+          <p id="weaknesses">Weaknesses:</p>
+          <p id="resistances">Resistances:</p>
+          <p id="immunities">Immunities:</p>
+        </div>
+        <div id="toast-container"></div>
+        <div id="pop-up" class="hidden">
+          <div id="pop-up-window">
+            <p id="pop-up-message"></p>
+            <div class="pop-up-btns">
+              <button id="confirm-replace">Yes</button>
+              <button id="cancel-replace">No</button>
+            </div>
+            <label class="custom-checkbox">
+              <input type="checkbox" id="do-not-show" />
+              <span class="checkmark"></span> Do not show this window again
+            </label>
+          </div>
+        </div>
+        <div id="toast-container"></div>
+      </div>
+    </div>
+    <script src="detail.js" type="module"></script>
+  </body>
+</html>
