@@ -1,4 +1,4 @@
-import rgbaColors from "../../../utils/rgbaColors.js"
+import rgbaColors from "../../../utils/rgbaColors.js";
 
 const storedPokemonName = sessionStorage.getItem("pokemonName");
 const storedPkmnColor = sessionStorage.getItem("pkmnColor");
@@ -11,13 +11,12 @@ const gender = document.getElementById("gender");
 const fa = document.querySelectorAll(".fa-solid");
 const openMenu = document.getElementById("open-menu");
 const menuList = document.getElementById("menu-list");
-menuList.style.border = `0.3rem ridge ${storedPkmnColor}`
+menuList.style.border = `0.3rem ridge ${storedPkmnColor}`;
 const closeMenu = document.getElementById("close-menu");
 const backbtn = document.querySelector(".back");
 const button = document.getElementsByTagName("button");
 
 let shiny = false;
-
 
 gender.style.textShadow = `0 0 ${
   storedPkmnColor === "white" || storedPkmnColor === "yellow" ? "1px" : "10px"
@@ -57,7 +56,7 @@ async function getSprites() {
       `https://pokeapi.co/api/v2/pokemon/${storedPokemonName}`
     );
     const data = await response.json();
-    console.log(data.sprites);
+
     male.src = `../../../assets/pokemon-images-normal/${storedPokemonName}.png`;
     male.onerror = function () {
       this.onerror = null;
@@ -83,7 +82,6 @@ shinyMale.addEventListener("click", () => {
     male.src = `../../../assets/pokemon-images-normal/${storedPokemonName}.png`;
     shiny = false;
   }
-  console.log("clicked");
 });
 
 shinyFemale.addEventListener("click", () => {
@@ -102,7 +100,6 @@ shinyFemale.addEventListener("click", () => {
     };
     shiny = false;
   }
-  console.log("clicked");
 });
 
 openMenu.addEventListener("click", () => {

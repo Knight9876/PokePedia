@@ -9,6 +9,7 @@
 }
 
 .main-container {
+    overflow-y: auto;
     animation: fadeIn 0.5s ease forwards;
     position: absolute;
     top: 0;
@@ -16,6 +17,7 @@
     display: flex;
     width: 100%;
     height: 100%;
+    margin-bottom: 1rem;
 }
 
 #btns {
@@ -100,7 +102,7 @@ button {
     position: absolute;
     top: 50%;
     right: 0;
-    transform: translate(0%, -50%);
+    transform: translate(0%, -45%);
     text-align: center;
     margin-right: 2rem;
 }
@@ -118,4 +120,8 @@ th, td {
     left: 0;
     transform: translate(0%, -400%);
     rotate: 270deg;
+}
+
+.main-container::-webkit-scrollbar {
+    width: 0;
 }

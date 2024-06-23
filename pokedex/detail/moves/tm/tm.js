@@ -14,12 +14,6 @@ const menuList = document.getElementById("menu-list");
 menuList.style.border = `0.3rem ridge ${storedPkmnColor}`;
 const closeMenu = document.getElementById("close-menu");
 
-<<<<<<< HEAD
-=======
-const storedPokemonName = sessionStorage.getItem("pokemonName");
-const storedPkmnColor = sessionStorage.getItem("pkmnColor");
-
->>>>>>> df70b0ccc52487a26e8c74fc73be1c56acf71fdb
 function showLoader() {
   loader.style.visibility = "visible";
   mainContainer.style.visibility = "hidden";
@@ -118,78 +112,15 @@ async function displayTmMoves(pokemonName) {
     fa.style.textShadow = `0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}`;
   }
 
-<<<<<<< HEAD
-  tmMovesContainer.style.setProperty(
-    "--scrollbar-thumb-color",
-    storedPkmnColor
-  );
-  tmMovesContainer.style.setProperty(
-    "--scrollbar-track-color",
-    rgbaColorsForScrollbar[storedPkmnColor]
-  );
-=======
-  tmMovesContainer.style.setProperty("--scrollbar-thumb-color", storedPkmnColor);
-  tmMovesContainer.style.setProperty("--scrollbar-track-color", rgbaColorsForScrollbar[storedPkmnColor]);
->>>>>>> df70b0ccc52487a26e8c74fc73be1c56acf71fdb
-
   const allMachinesPromise = fetchAllMachines();
   const tmMovesPromise = fetchPokemonTmMoves(pokemonName);
 
   try {
-<<<<<<< HEAD
-    const [allMachines, tmMoves] = await Promise.all([
-      allMachinesPromise,
-      tmMovesPromise,
-    ]);
-    const tmMovesWithNumbers = await fetchTmNumbers(tmMoves, allMachines);
-
-    const tmMovesHtml = tmMovesWithNumbers
-      .map((move) => {
-        const boxShadowSize =
-          storedPkmnColor === "yellow"
-            ? "3px"
-            : storedPkmnColor === "white"
-            ? "2px"
-            : "5px";
-        return `
-        <div class="move-container" style="border: 0.3rem ridge ${storedPkmnColor}; box-shadow: 0px 0px 10px ${storedPkmnColor}, 0px 0px 10px ${storedPkmnColor}; background: ${
-          rgbaColors[storedPkmnColor]
-        };">
-          <p class="move-number" style="text-shadow: 0px 0px ${boxShadowSize} ${storedPkmnColor}, 0px 0px ${boxShadowSize} ${storedPkmnColor}, 0px 0px ${boxShadowSize} ${storedPkmnColor}, 0px 0px ${boxShadowSize} ${storedPkmnColor};">TM ${
-          move.tmNumber
-        }</p>
-          <p class="move-name" style="text-shadow: 0px 0px ${boxShadowSize} ${storedPkmnColor}, 0px 0px ${boxShadowSize} ${storedPkmnColor}, 0px 0px ${boxShadowSize} ${storedPkmnColor}, 0px 0px ${boxShadowSize} ${storedPkmnColor};">${
-          move.name.includes("-o-") ? move.name : move.name.split("-").join(" ")
-        }</p>
-        </div>
-      `;
-      })
-      .join("");
-
-    tmMovesContainer.innerHTML =
-      tmMovesHtml || "This POKÉMON cannot learn TM moves.";
-=======
-    const [allMachines, tmMoves] = await Promise.all([allMachinesPromise, tmMovesPromise]);
-    const tmMovesWithNumbers = await fetchTmNumbers(tmMoves, allMachines);
-
-    const tmMovesHtml = tmMovesWithNumbers.map((move) => {
-      const boxShadowSize = storedPkmnColor === "yellow" ? "3px" : storedPkmnColor === "white" ? "2px" : "5px";
-      return `
-        <div class="move-container" style="border: 0.3rem ridge ${storedPkmnColor}; box-shadow: 0px 0px 10px ${storedPkmnColor}, 0px 0px 10px ${storedPkmnColor}; background: ${rgbaColors[storedPkmnColor]};">
-          <p class="move-number" style="text-shadow: 0px 0px ${boxShadowSize} ${storedPkmnColor}, 0px 0px ${boxShadowSize} ${storedPkmnColor}, 0px 0px ${boxShadowSize} ${storedPkmnColor}, 0px 0px ${boxShadowSize} ${storedPkmnColor};">TM ${move.tmNumber}</p>
-          <p class="move-name" style="text-shadow: 0px 0px ${boxShadowSize} ${storedPkmnColor}, 0px 0px ${boxShadowSize} ${storedPkmnColor}, 0px 0px ${boxShadowSize} ${storedPkmnColor}, 0px 0px ${boxShadowSize} ${storedPkmnColor};">${move.name.includes("-o-") ? move.name : move.name.split("-").join(" ")}</p>
-        </div>
-      `;
-    }).join("");
-
-    tmMovesContainer.innerHTML = tmMovesHtml || "This POKÉMON cannot learn TM moves.";
->>>>>>> df70b0ccc52487a26e8c74fc73be1c56acf71fdb
   } catch (error) {
     console.error("Error displaying TM moves:", error);
     tmMovesContainer.innerHTML = "Failed to fetch TM moves.";
   }
 }
-
 
 openMenu.addEventListener("click", () => {
   menuList.classList.toggle("show");

@@ -242,7 +242,7 @@ async function displayTypeChart(pokemonNames, damageObject) {
   
   let tableHtml = "<table><thead><tr><th>Type</th>";
   pokemonDataList.forEach((pokemon) => {
-    tableHtml += `<th><img src="${pokemon.image}" alt="${pokemon.name}" class="pokemon-header-image"/></th>`;
+    tableHtml += `<th><img src="${pokemon.image}" alt="${pokemon.name}" class="pokemon-image"/></th>`;
   });
   tableHtml += "</tr></thead><tbody>";
 

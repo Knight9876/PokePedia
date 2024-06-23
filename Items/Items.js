@@ -177,10 +177,18 @@ async function fetchItemsList(itemName) {
 }
 
 async function handleItemClick(itemName, itemList) {
-  const item = itemList.find((item) => item.name === itemName.toLowerCase());
+  let item = itemList.find((item) => item.name === itemName.toLowerCase());
+
+  if(!item) {
+    item = itemList.find((item) => item.url.split("/")[6] === itemName);
+  }
 
   if (!item) {
     console.error("Item not found:", itemName);
+    popUpWindow.innerHTML = `
+          <button type="button"><i class="fa-solid fa-xmark close-pop-up"></i></button>
+          <p>No Details Found.</p>
+          `;
     return;
   }
 

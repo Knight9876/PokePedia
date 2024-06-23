@@ -138,8 +138,8 @@ async function displayFilteredPokemon(searchTerm) {
     );
     await fetchFilteredPokemon(filteredPokemon);
   } else if (mega.checked) {
-    console.log(mega.checked);
-    console.log(allPokemonResults);
+    
+    
     const megaPokemonList = allPokemonResults.filter((pokemon) =>
       pokemon.name.includes("mega")
     );
