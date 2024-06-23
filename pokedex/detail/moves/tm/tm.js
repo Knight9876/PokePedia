@@ -10,16 +10,13 @@ const openMenu = document.getElementById("open-menu");
 const menuList = document.getElementById("menu-list");
 const closeMenu = document.getElementById("close-menu");
 
-
 const storedPokemonName = sessionStorage.getItem("pokemonName");
 const storedPkmnColor = sessionStorage.getItem("pkmnColor");
-
 
 function showLoader() {
   loader.style.visibility = "visible";
   mainContainer.style.visibility = "hidden";
 }
-
 
 function hideLoader() {
   loader.style.visibility = "hidden";
@@ -34,7 +31,6 @@ for (let btn of document.getElementsByTagName("button")) {
   btn.style.textShadow = `0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}`;
 }
 
-
 async function fetchAllMachines() {
   try {
     const response = await fetch(
@@ -47,7 +43,6 @@ async function fetchAllMachines() {
     return [];
   }
 }
-
 
 async function fetchPokemonTmMoves(pokemonName) {
   try {
@@ -71,11 +66,11 @@ async function fetchPokemonTmMoves(pokemonName) {
       "waterfall",
       "dive",
       "defog",
-      "rock-climb"
+      "rock-climb",
     ];
 
     return tmMoves
-      .filter((move) => !hmMoves.includes(move.move.name)) 
+      .filter((move) => !hmMoves.includes(move.move.name))
       .map((move) => ({
         name: move.move.name,
         url: move.move.url,
@@ -86,104 +81,63 @@ async function fetchPokemonTmMoves(pokemonName) {
   }
 }
 
-
 async function fetchTmNumbers(tmMoves, allMachines) {
-  const tmNumbers = [];
-
-  for (const move of tmMoves) {
+  const tmNumberPromises = tmMoves.map(async (move) => {
     const moveResponse = await fetch(move.url);
     const moveData = await moveResponse.json();
-    const machine = moveData.machines.find((machine) => {
-      return allMachines.some(
-        (machineItem) => machineItem.url === machine.machine.url
-      );
-    });
+    const machine = moveData.machines.find((machine) =>
+      allMachines.some((machineItem) => machineItem.url === machine.machine.url)
+    );
 
     if (machine) {
       const tmNumber = machine.machine.url.split("/").slice(-2, -1)[0];
-      tmNumbers.push({
+      return {
         name: move.name,
-        tmNumber: parseInt(tmNumber, 10), 
-      });
+        tmNumber: parseInt(tmNumber, 10),
+      };
+    } else {
+      return null;
     }
-  }
+  });
 
-  return tmNumbers.sort((a, b) => a.tmNumber - b.tmNumber); 
+  const tmNumbers = await Promise.all(tmNumberPromises);
+  return tmNumbers
+    .filter((tmNumber) => tmNumber !== null)
+    .sort((a, b) => a.tmNumber - b.tmNumber);
 }
-
 
 async function displayTmMoves(pokemonName) {
   for (let fa of faSolid) {
     fa.style.textShadow = `0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}`;
   }
 
-  tmMovesContainer.style.setProperty(
-    "--scrollbar-thumb-color",
-    storedPkmnColor
-  );
-  tmMovesContainer.style.setProperty(
-    "--scrollbar-track-color",
-    rgbaColorsForScrollbar[storedPkmnColor]
-  );
-  
+  tmMovesContainer.style.setProperty("--scrollbar-thumb-color", storedPkmnColor);
+  tmMovesContainer.style.setProperty("--scrollbar-track-color", rgbaColorsForScrollbar[storedPkmnColor]);
 
-  const allMachines = await fetchAllMachines();
-  const tmMoves = await fetchPokemonTmMoves(pokemonName);
-  const tmMovesWithNumbers = await fetchTmNumbers(tmMoves, allMachines);
+  const allMachinesPromise = fetchAllMachines();
+  const tmMovesPromise = fetchPokemonTmMoves(pokemonName);
 
-  const tmMovesHtml = tmMovesWithNumbers
-    .map((move) =>
-      storedPkmnColor === "white"
-        ? `
-      <div class="move-container" style="border: 0.3rem ridge ${storedPkmnColor}; box-shadow: 0px 0px 10px ${storedPkmnColor}, 0px 0px 10px ${storedPkmnColor}; background: ${
-            rgbaColors[storedPkmnColor]
-          };">
-        <p class="move-number" style="text-shadow: 0px 0px 2px ${storedPkmnColor}, 0px 0px 2px ${storedPkmnColor}, 0px 0px 2px ${storedPkmnColor}, 0px 0px 2px ${storedPkmnColor};">TM ${
-            move.tmNumber
-          }</p>
-        <p class="move-name" style="text-shadow: 0px 0px 2px ${storedPkmnColor}, 0px 0px 2px ${storedPkmnColor}, 0px 0px 2px ${storedPkmnColor}, 0px 0px 2px ${storedPkmnColor};">${
-            move.name.includes("-o-")
-              ? move.name
-              : move.name.split("-").join(" ")
-          }</p>
-      </div>
-    `
-        : storedPkmnColor === "yellow"
-        ? `
-      <div class="move-container" style="border: 0.3rem ridge ${storedPkmnColor}; box-shadow: 0px 0px 10px ${storedPkmnColor}, 0px 0px 10px ${storedPkmnColor}; background: ${
-            rgbaColors[storedPkmnColor]
-          };">
-        <p class="move-number" style="text-shadow: 0px 0px 3px ${storedPkmnColor}, 0px 0px 3px ${storedPkmnColor}, 0px 0px 3px ${storedPkmnColor}, 0px 0px 3px ${storedPkmnColor};">TM ${
-            move.tmNumber
-          }</p>
-        <p class="move-name" style="text-shadow: 0px 0px 3px ${storedPkmnColor}, 0px 0px 3px ${storedPkmnColor}, 0px 0px 3px ${storedPkmnColor}, 0px 0px 3px ${storedPkmnColor};">${
-            move.name.includes("-o-")
-              ? move.name
-              : move.name.split("-").join(" ")
-          }</p>
-      </div>
-    `
-        : `
-      <div class="move-container" style="border: 0.3rem ridge ${storedPkmnColor}; box-shadow: 0px 0px 10px ${storedPkmnColor}, 0px 0px 10px ${storedPkmnColor}; background: ${
-            rgbaColors[storedPkmnColor]
-          };">
-        <p class="move-number" style="text-shadow: 0px 0px 5px ${storedPkmnColor}, 0px 0px 5px ${storedPkmnColor}, 0px 0px 5px ${storedPkmnColor}, 0px 0px 5px ${storedPkmnColor};">TM ${
-            move.tmNumber
-          }</p>
-        <p class="move-name" style="text-shadow: 0px 0px 5px ${storedPkmnColor}, 0px 0px 5px ${storedPkmnColor}, 0px 0px 5px ${storedPkmnColor}, 0px 0px 5px ${storedPkmnColor};">${
-            move.name.includes("-o-")
-              ? move.name
-              : move.name.split("-").join(" ")
-          }</p>
-      </div>
-    `
-    )
-    .join("");
+  try {
+    const [allMachines, tmMoves] = await Promise.all([allMachinesPromise, tmMovesPromise]);
+    const tmMovesWithNumbers = await fetchTmNumbers(tmMoves, allMachines);
 
-  tmMovesHtml
-    ? (tmMovesContainer.innerHTML = tmMovesHtml)
-    : (tmMovesContainer.innerHTML = "This POKÉMON cannot learn TM moves.");
+    const tmMovesHtml = tmMovesWithNumbers.map((move) => {
+      const boxShadowSize = storedPkmnColor === "yellow" ? "3px" : storedPkmnColor === "white" ? "2px" : "5px";
+      return `
+        <div class="move-container" style="border: 0.3rem ridge ${storedPkmnColor}; box-shadow: 0px 0px 10px ${storedPkmnColor}, 0px 0px 10px ${storedPkmnColor}; background: ${rgbaColors[storedPkmnColor]};">
+          <p class="move-number" style="text-shadow: 0px 0px ${boxShadowSize} ${storedPkmnColor}, 0px 0px ${boxShadowSize} ${storedPkmnColor}, 0px 0px ${boxShadowSize} ${storedPkmnColor}, 0px 0px ${boxShadowSize} ${storedPkmnColor};">TM ${move.tmNumber}</p>
+          <p class="move-name" style="text-shadow: 0px 0px ${boxShadowSize} ${storedPkmnColor}, 0px 0px ${boxShadowSize} ${storedPkmnColor}, 0px 0px ${boxShadowSize} ${storedPkmnColor}, 0px 0px ${boxShadowSize} ${storedPkmnColor};">${move.name.includes("-o-") ? move.name : move.name.split("-").join(" ")}</p>
+        </div>
+      `;
+    }).join("");
+
+    tmMovesContainer.innerHTML = tmMovesHtml || "This POKÉMON cannot learn TM moves.";
+  } catch (error) {
+    console.error("Error displaying TM moves:", error);
+    tmMovesContainer.innerHTML = "Failed to fetch TM moves.";
+  }
 }
+
 
 openMenu.addEventListener("click", () => {
   menuList.classList.toggle("show");
@@ -214,12 +168,12 @@ tmMovesContainer.addEventListener("click", (event) => {
 });
 
 (async () => {
-  showLoader(); 
+  showLoader();
 
   if (storedPokemonName) {
     await displayTmMoves(storedPokemonName);
-    hideLoader(); 
+    hideLoader();
   } else {
-    hideLoader(); 
+    hideLoader();
   }
 })();
