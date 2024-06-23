@@ -12,7 +12,9 @@ const openMenu = document.getElementById("open-menu");
 const menuList = document.getElementById("menu-list");
 const closeMenu = document.getElementById("close-menu");
 const faSolid = document.querySelectorAll(".fa-solid");
+const pokemonName = document.getElementById("pokemon-name")
 
+pokemonName.innerHTML += " " + storedPokemonName
 
 for (const h of h1) {
   storedPkmnColor === "white" ?
