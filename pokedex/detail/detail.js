@@ -82,7 +82,7 @@ async function fetchPkmnColor_Generation_PokedexEntry_Names() {
     );
 
     return [
-      generationUrl.match(/\/generation\/(\d+)\
+      generationUrl.split("/")[6],
       colorData.name,
       flavorTexts.length > 0 ? flavorTexts[0].flavor_text : null,
       namesInLanguages,
