@@ -1,6 +1,10 @@
 import rgbaColors from "../../../../utils/rgbaColors.js";
 import rgbaColorsForScrollbar from "../../../../utils/rgbaColorsForScrollbar.js";
 
+
+const storedPokemonAbilityName = sessionStorage.getItem("pokemonAbilityName");
+const storedPkmnColor = sessionStorage.getItem("pkmnColor");
+
 const abilityDetailsContainer = document.getElementById("ability-details");
 const backbtn = document.querySelector(".back");
 const faSolid = document.querySelectorAll(".fa-solid");
@@ -9,12 +13,10 @@ const loader = document.getElementById("loader");
 const mainContainer = document.querySelector(".container");
 const openMenu = document.getElementById("open-menu");
 const menuList = document.getElementById("menu-list");
+menuList.style.border = `0.3rem ridge ${storedPkmnColor}`
 const closeMenu = document.getElementById("close-menu");
 const pokemonList = document.getElementById("pokemon-list");
 const abilityName = document.querySelector(".ability-name");
-
-const storedPokemonAbilityName = sessionStorage.getItem("pokemonAbilityName");
-const storedPkmnColor = sessionStorage.getItem("pkmnColor");
 
 document.title +=
   "-" + storedPokemonAbilityName.toUpperCase().split("-").join(" ");

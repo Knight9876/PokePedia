@@ -1,14 +1,15 @@
 import rgbaColors from "../../../utils/rgbaColors.js";
 
+const storedPkmnColor = sessionStorage.getItem("pkmnColor");
+
 const button = document.getElementsByTagName("button");
 const backbtn = document.querySelector(".back");
 const faSolid = document.querySelectorAll(".fa-solid");
 const openMenu = document.getElementById("open-menu");
 const menuList = document.getElementById("menu-list");
+menuList.style.border = `0.3rem ridge ${storedPkmnColor}`;
 const closeMenu = document.getElementById("close-menu");
-const infoDiv = document.querySelector(".info-div")
-
-const storedPkmnColor = sessionStorage.getItem("pkmnColor");
+const infoDiv = document.querySelector(".info-div");
 
 for (let btn of button) {
   btn.style.border = `0.3rem ridge ${storedPkmnColor}`;

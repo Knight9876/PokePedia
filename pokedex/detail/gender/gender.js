@@ -1,3 +1,5 @@
+import rgbaColors from "../../../utils/rgbaColors.js"
+
 const storedPokemonName = sessionStorage.getItem("pokemonName");
 const storedPkmnColor = sessionStorage.getItem("pkmnColor");
 
@@ -9,10 +11,13 @@ const gender = document.getElementById("gender");
 const fa = document.querySelectorAll(".fa-solid");
 const openMenu = document.getElementById("open-menu");
 const menuList = document.getElementById("menu-list");
+menuList.style.border = `0.3rem ridge ${storedPkmnColor}`
 const closeMenu = document.getElementById("close-menu");
 const backbtn = document.querySelector(".back");
+const button = document.getElementsByTagName("button");
 
 let shiny = false;
+
 
 gender.style.textShadow = `0 0 ${
   storedPkmnColor === "white" || storedPkmnColor === "yellow" ? "1px" : "10px"
@@ -34,6 +39,16 @@ for (const f of fa) {
   } ${storedPkmnColor}, 0 0 ${
     storedPkmnColor === "white" || storedPkmnColor === "yellow" ? "1px" : "10px"
   } ${storedPkmnColor}`;
+}
+
+for (let btn of button) {
+  btn.style.border = `0.3rem ridge ${storedPkmnColor}`;
+  storedPkmnColor === "white"
+    ? (btn.style.textShadow = `0px 0px 2px ${storedPkmnColor}, 0px 0px 2px ${storedPkmnColor}, 0px 0px 2px ${storedPkmnColor}, 0px 0px 2px ${storedPkmnColor}`)
+    : storedPkmnColor === "yellow"
+    ? (btn.style.textShadow = `0px 0px 3px ${storedPkmnColor}, 0px 0px 3px ${storedPkmnColor}, 0px 0px 3px ${storedPkmnColor}, 0px 0px 3px ${storedPkmnColor}`)
+    : (btn.style.textShadow = `0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}`);
+  btn.style.background = rgbaColors[storedPkmnColor];
 }
 
 async function getSprites() {
@@ -102,4 +117,7 @@ closeMenu.addEventListener("click", () => {
   closeMenu.style.visibility = "hidden";
 });
 
-backbtn.addEventListener("click", () => (window.location.href = "../detail.html"));
+backbtn.addEventListener(
+  "click",
+  () => (window.location.href = "../detail.html")
+);

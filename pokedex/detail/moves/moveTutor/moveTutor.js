@@ -1,6 +1,9 @@
 import rgbaColors from "../../../../utils/rgbaColors.js";
 import rgbaColorsForScrollbar from "../../../../utils/rgbaColorsForScrollbar.js";
 
+const storedPokemonName = sessionStorage.getItem("pokemonName");
+const storedPkmnColor = sessionStorage.getItem("pkmnColor");
+
 const tutorMovesContainer = document.getElementById("moves");
 const backbtn = document.querySelector(".back");
 const faSolid = document.querySelectorAll(".fa-solid");
@@ -8,18 +11,13 @@ const loader = document.getElementById("loader");
 const mainContainer = document.querySelector(".container");
 const openMenu = document.getElementById("open-menu");
 const menuList = document.getElementById("menu-list");
+menuList.style.border = `0.3rem ridge ${storedPkmnColor}`;
 const closeMenu = document.getElementById("close-menu");
-
-
-const storedPokemonName = sessionStorage.getItem("pokemonName");
-const storedPkmnColor = sessionStorage.getItem("pkmnColor")
-
 
 function showLoader() {
   loader.style.visibility = "visible";
   mainContainer.style.visibility = "hidden";
 }
-
 
 function hideLoader() {
   loader.style.visibility = "hidden";
@@ -34,7 +32,6 @@ for (let btn of document.getElementsByTagName("button")) {
   btn.style.textShadow = `0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}`;
 }
 
-
 async function fetchPokemonData(pokemonName) {
   try {
     const response = await fetch(
@@ -46,7 +43,6 @@ async function fetchPokemonData(pokemonName) {
     return null;
   }
 }
-
 
 async function fetchPokemonTutorMoves(pokemonName) {
   try {
@@ -60,7 +56,7 @@ async function fetchPokemonTutorMoves(pokemonName) {
     );
 
     return tutorMoves.map((move) => {
-      const moveNumber = move.move.url.split("/").slice(-2, -1)[0]; 
+      const moveNumber = move.move.url.split("/").slice(-2, -1)[0];
       return {
         name: move.move.name,
         moveNumber,
@@ -72,9 +68,7 @@ async function fetchPokemonTutorMoves(pokemonName) {
   }
 }
 
-
 async function displayTutorMoves(pokemonName) {
-
   for (let fa of faSolid) {
     fa.style.textShadow = `0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}`;
   }
@@ -147,7 +141,10 @@ closeMenu.addEventListener("click", () => {
   closeMenu.style.visibility = "hidden";
 });
 
-backbtn.addEventListener("click", () => window.location.href = "../moves.html");
+backbtn.addEventListener(
+  "click",
+  () => (window.location.href = "../moves.html")
+);
 
 tutorMovesContainer.addEventListener("click", (event) => {
   if (event.target.tagName === "P") {
@@ -170,12 +167,12 @@ tutorMovesContainer.style.setProperty(
 );
 
 (async () => {
-  showLoader(); 
+  showLoader();
 
   if (storedPokemonName) {
     await displayTutorMoves(storedPokemonName);
-    hideLoader(); 
+    hideLoader();
   } else {
-    hideLoader(); 
+    hideLoader();
   }
 })();

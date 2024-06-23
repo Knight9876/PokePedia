@@ -1,5 +1,8 @@
 import rgbaColors from "../../../utils/rgbaColors.js";
 
+const storedPokemonName = sessionStorage.getItem("pokemonName");
+const storedPkmnColor = sessionStorage.getItem("pkmnColor");
+
 const mainContainer = document.querySelector(".main-container");
 const backbtn = document.querySelector(".back");
 const faSolid = document.querySelectorAll(".fa-solid");
@@ -7,17 +10,13 @@ const locationContainer = document.querySelector(".location");
 const loader = document.getElementById("loader");
 const openMenu = document.getElementById("open-menu");
 const menuList = document.getElementById("menu-list");
+menuList.style.border = `0.3rem ridge ${storedPkmnColor}`;
 const closeMenu = document.getElementById("close-menu");
-
-const storedPokemonName = sessionStorage.getItem("pokemonName");
-const storedPkmnColor = sessionStorage.getItem("pkmnColor")
-
 
 function showLoader() {
   loader.style.visibility = "visible";
   mainContainer.style.visibility = "hidden";
 }
-
 
 function hideLoader() {
   loader.style.visibility = "hidden";
@@ -33,8 +32,8 @@ for (let btn of document.getElementsByTagName("button")) {
 }
 
 function shortenLocation(location) {
-  const words = location.split("-"); 
-  let shortenedLocation = words.slice(0, 3).join(" "); 
+  const words = location.split("-");
+  let shortenedLocation = words.slice(0, 3).join(" ");
   shortenedLocation =
     shortenedLocation.includes(" area") || shortenedLocation.includes(" main")
       ? shortenedLocation.replace(/ area| main/g, "")
@@ -58,7 +57,6 @@ async function fetchLocations() {
       return shortenedArea;
     });
 
-    
     if (locationArea.length === 0) {
       locationContainer.innerHTML =
         "<p>This POKÉMON cannot be found or encountered.</p>";
@@ -74,7 +72,6 @@ async function fetchLocations() {
       });
     }
     hideLoader();
-    
   } catch (error) {
     console.error(error);
     hideLoader();
@@ -93,7 +90,10 @@ closeMenu.addEventListener("click", () => {
   closeMenu.style.visibility = "hidden";
 });
 
-backbtn.addEventListener("click", () => window.location.href = "../detail.html");
+backbtn.addEventListener(
+  "click",
+  () => (window.location.href = "../detail.html")
+);
 
 locationContainer.addEventListener("click", (event) => {
   if (event.target.tagName === "P") {

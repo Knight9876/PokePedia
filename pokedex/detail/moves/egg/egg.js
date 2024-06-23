@@ -1,5 +1,8 @@
 import rgbaColors from "../../../../utils/rgbaColors.js";
 
+const storedPokemonName = sessionStorage.getItem("pokemonName");
+const storedPkmnColor = sessionStorage.getItem("pkmnColor");
+
 const eggMovesContainer = document.getElementById("moves");
 const backbtn = document.querySelector(".back");
 const faSolid = document.querySelectorAll(".fa-solid");
@@ -7,19 +10,14 @@ const loader = document.getElementById("loader");
 const mainContainer = document.querySelector(".container");
 const openMenu = document.getElementById("open-menu");
 const menuList = document.getElementById("menu-list");
+menuList.style.border = `0.3rem ridge ${storedPkmnColor}`;
 const closeMenu = document.getElementById("close-menu");
-const infoDiv = document.querySelector(".info-div")
-
-
-const storedPokemonName = sessionStorage.getItem("pokemonName");
-const storedPkmnColor = sessionStorage.getItem("pkmnColor")
-
+const infoDiv = document.querySelector(".info-div");
 
 function showLoader() {
   loader.style.visibility = "visible";
   mainContainer.style.visibility = "hidden";
 }
-
 
 function hideLoader() {
   loader.style.visibility = "hidden";
@@ -34,7 +32,6 @@ for (let btn of document.getElementsByTagName("button")) {
   btn.style.textShadow = `0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}`;
 }
 
-
 async function fetchPokemonEggMoves(pokemonName) {
   try {
     const response = await fetch(
@@ -48,7 +45,7 @@ async function fetchPokemonEggMoves(pokemonName) {
     );
 
     return eggMoves.map((move) => {
-      const moveNumber = move.move.url.split("/").slice(-2, -1)[0]; 
+      const moveNumber = move.move.url.split("/").slice(-2, -1)[0];
       return {
         name: move.move.name,
         moveNumber,
@@ -60,9 +57,7 @@ async function fetchPokemonEggMoves(pokemonName) {
   }
 }
 
-
 async function displayEggMoves(pokemonName) {
-  
   for (let fa of faSolid) {
     fa.style.textShadow = `0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}`;
   }
@@ -152,11 +147,11 @@ eggMovesContainer.addEventListener("click", (event) => {
 });
 
 (async () => {
-  showLoader(); 
+  showLoader();
   if (storedPokemonName) {
     await displayEggMoves(storedPokemonName);
-    hideLoader(); 
+    hideLoader();
   } else {
-    hideLoader(); 
+    hideLoader();
   }
 })();

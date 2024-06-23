@@ -1,6 +1,9 @@
 import rgbaColors from "../../../../utils/rgbaColors.js";
 import rgbaColorsForScrollbar from "../../../../utils/rgbaColorsForScrollbar.js";
 
+const storedPokemonMoveNameOrID = sessionStorage.getItem("pokemonMoveNameOrId");
+const storedPkmnColor = sessionStorage.getItem("pkmnColor");
+
 const moveDetailsContainer = document.getElementById("move-details");
 const backbtn = document.querySelector(".back");
 const faSolid = document.querySelectorAll(".fa-solid");
@@ -9,11 +12,9 @@ const loader = document.getElementById("loader");
 const mainContainer = document.querySelector(".container");
 const openMenu = document.getElementById("open-menu");
 const menuList = document.getElementById("menu-list");
+menuList.style.border = `0.3rem ridge ${storedPkmnColor}`;
 const closeMenu = document.getElementById("close-menu");
 const pokemonList = document.getElementById("pokemon-list");
-
-const storedPokemonMoveNameOrID = sessionStorage.getItem("pokemonMoveNameOrId");
-const storedPkmnColor = sessionStorage.getItem("pkmnColor");
 
 document.title +=
   "-" + storedPokemonMoveNameOrID.toUpperCase().split("-").join(" ");
@@ -30,18 +31,15 @@ for (let btn of document.getElementsByTagName("button")) {
   btn.style.textShadow = `0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}`;
 }
 
-
 function showLoader() {
   loader.style.visibility = "visible";
   mainContainer.style.visibility = "hidden";
 }
 
-
 function hideLoader() {
   loader.style.visibility = "hidden";
   mainContainer.style.visibility = "visible";
 }
-
 
 async function fetchMoveDetails(moveName) {
   try {
@@ -54,7 +52,6 @@ async function fetchMoveDetails(moveName) {
       "Kindly click on the MOVE NAME. Thank You!!!";
   }
 }
-
 
 async function displayMoveDetails(moveData) {
   for (let fa of faSolid) {
@@ -127,7 +124,6 @@ async function displayMoveDetails(moveData) {
     let tmEntries = [];
     for (const [tm, games] of Object.entries(groupedTMMoves)) {
       if (tm.startsWith("tm")) {
-        
         let tmEntry = `<p class="tm-header">TM: ${tm.replace("m", "m ")}</p>`;
         let tmGames = `<div class="machine">`;
         games.forEach((game) => {
@@ -146,7 +142,6 @@ async function displayMoveDetails(moveData) {
     let trEntries = [];
     for (const [tm, games] of Object.entries(groupedTMMoves)) {
       if (tm.startsWith("tr")) {
-        
         let trEntry = `<p class="tm-header">TR: ${tm.replace("r", "r ")}</p>`;
         let tmGames = `<div class="machine">`;
         games.forEach((game) => {
@@ -165,7 +160,6 @@ async function displayMoveDetails(moveData) {
     let hmEntries = [];
     for (const [tm, games] of Object.entries(groupedTMMoves)) {
       if (tm.startsWith("hm")) {
-        
         let hmEntry = `<p class="tm-header">HM: ${tm.replace("m", "m ")}</p>`;
         let tmGames = `<div class="machine">`;
         games.forEach((game) => {
@@ -218,29 +212,24 @@ async function fetchTmDetails(url) {
   };
 }
 
-
 async function fetchPokemonDetails(url) {
   try {
     let response = await fetch(url);
     let data = await response.json();
 
     if (data.sprites.front_default) {
-      
       let pokemonItem = document.createElement("div");
       pokemonItem.classList.add("pokemon-item");
 
-      
       let pkmnName = data.species.name;
 
-      
       if (pkmnName.includes("nidoran")) {
-        pkmnName = pkmnName.split("-")[0]; 
+        pkmnName = pkmnName.split("-")[0];
       } else if (pkmnName.includes("-o")) {
-        
       } else if (pkmnName.includes("type-null")) {
-        pkmnName = pkmnName.replace("-", ":"); 
+        pkmnName = pkmnName.replace("-", ":");
       } else if (pkmnName.includes("-")) {
-        pkmnName = pkmnName.replace("-", " "); 
+        pkmnName = pkmnName.replace("-", " ");
       }
 
       if (pkmnName.includes("mr")) {
@@ -276,11 +265,7 @@ closeMenu.addEventListener("click", () => {
   closeMenu.style.visibility = "hidden";
 });
 
-backbtn.addEventListener(
-  "click",
-  () => (history.back())
-);
-
+backbtn.addEventListener("click", () => history.back());
 
 pokemonList.addEventListener("click", (event) => {
   if (event.target.tagName === "IMG") {
@@ -291,7 +276,7 @@ pokemonList.addEventListener("click", (event) => {
 });
 
 (async () => {
-  showLoader(); 
+  showLoader();
 
   if (storedPokemonMoveNameOrID) {
     await fetchMoveDetails(storedPokemonMoveNameOrID);

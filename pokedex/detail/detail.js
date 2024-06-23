@@ -16,7 +16,6 @@ const typeEffectiveness = document.getElementById("type-effectiveness");
 const popUpWindow = document.getElementById("pop-up-window");
 const checkmark = document.querySelector(".checkmark");
 
-
 let storedPokemonCompareNameList = sessionStorage.getItem(
   "pokemonCompareNameList"
 );
@@ -37,20 +36,15 @@ let pkmnColor,
   genderRate,
   storedPokemonName;
 
-
-
-
 function showLoader() {
   loader.style.visibility = "visible";
   mainContainer.style.visibility = "hidden";
 }
 
-
 function hideLoader() {
   loader.style.visibility = "hidden";
   mainContainer.style.visibility = "visible";
 }
-
 
 async function fetchPkmnColor_Generation_PokedexEntry_Names() {
   pokemonImage.alt = storedPokemonName;
@@ -68,7 +62,6 @@ async function fetchPkmnColor_Generation_PokedexEntry_Names() {
       (entry) => entry.language.name === "en"
     );
 
-    
     const desiredLanguages = ["fr", "zh-Hans", "ja", "roomaji"];
     const namesInLanguages = {};
     speciesData.names.forEach((nameEntry) => {
@@ -95,7 +88,6 @@ async function fetchPkmnColor_Generation_PokedexEntry_Names() {
   }
 }
 
-
 async function fetchAllDetails(
   gen,
   pkmnColor,
@@ -105,15 +97,12 @@ async function fetchAllDetails(
   genderRate
 ) {
   statsContainer.style.border = "none";
+  menuList.style.border = `0.3rem ridge ${pkmnColor}`;
   try {
     const response = await fetch(
       `https://pokeapi.co/api/v2/pokemon/${storedPokemonName}`
     );
     const data = await response.json();
-
-    
-    
-    
 
     pokemonImage.src = `../../assets/pokemon-images-normal/${storedPokemonName}.png`;
     pokemonImage.onerror = function () {
@@ -196,7 +185,6 @@ async function fetchAllDetails(
       ? pokemonEntry.split(" ").slice(0, 25).join(" ")
       : "";
 
-    
     const pokemonStats = stats
       .map(
         (stat) => `
@@ -220,22 +208,19 @@ async function fetchAllDetails(
       )
       .join("");
 
-    
     statsContainer.innerHTML = pokemonStats;
     statsContainer.style.boxShadow =
       typeEffectiveness.style.boxShadow = `0px 0px 20px ${pkmnColor}`;
     statsContainer.style.background = typeEffectiveness.style.background =
       rgbaColors[pkmnColor];
 
-    
     setTimeout(() => {
       const progressElements = document.querySelectorAll(".progress");
       progressElements.forEach((progress, index) => {
         progress.style.width = `${stats[index].base_stat}%`;
       });
-    }, 100); 
+    }, 100);
 
-    
     pkmnColor === "white"
       ? (pokemonDetails.style.textShadow = `0px 0px 2px ${pkmnColor}, 0px 0px 2px ${pkmnColor}, 0px 0px 2px ${pkmnColor}, 0px 0px 2px ${pkmnColor}`)
       : pkmnColor === "yellow"
@@ -262,11 +247,10 @@ async function fetchAllDetails(
   } catch (error) {
     console.error("Error fetching Pokémon details:", error);
   } finally {
-    hideLoader(); 
+    hideLoader();
     pokemonImage.style.visibility = "visible";
   }
 }
-
 
 async function fetchPokemonData(pokemonNameOrId) {
   try {
@@ -281,7 +265,6 @@ async function fetchPokemonData(pokemonNameOrId) {
   }
 }
 
-
 async function fetchNeighboringPokemon(currentPokemonName, direction) {
   const currentPokemonData = await fetchPokemonData(currentPokemonName);
   if (!currentPokemonData) {
@@ -293,17 +276,17 @@ async function fetchNeighboringPokemon(currentPokemonName, direction) {
   if (direction === "previous") {
     currentPokemonId -= 1;
     if (currentPokemonId < 1) {
-      return null; 
+      return null;
     }
   } else if (direction === "next") {
     currentPokemonId += 1;
-    
+
     const maxPokemonId = 1010;
     if (currentPokemonId > maxPokemonId) {
-      return null; 
+      return null;
     }
   } else {
-    return null; 
+    return null;
   }
 
   const neighboringPokemonData = await fetchPokemonData(currentPokemonId);
@@ -406,7 +389,6 @@ async function displayPokemonEffectives(pokemonName) {
 function showToast(message) {
   const toastContainer = document.getElementById("toast-container");
 
-  
   const toast = document.createElement("div");
   toast.classList.add("toast");
   toast.textContent = message;
@@ -414,13 +396,10 @@ function showToast(message) {
   toast.style.background = pkmnColor;
   toast.style.boxShadow = `0 0 10px ${pkmnColor}, 0 0 10px ${pkmnColor}`;
 
-  
   toastContainer.appendChild(toast);
 
-  
   toastContainer.classList.add("show");
 
-  
   setTimeout(() => {
     toastContainer.classList.remove("show");
     setTimeout(() => {
@@ -513,7 +492,6 @@ doNotShow.addEventListener("click", () => {
 });
 
 document.getElementById("compare").addEventListener("click", () => {
-  
   let storedPokemonCompareNameList = sessionStorage.getItem(
     "pokemonCompareNameList"
   );
@@ -535,14 +513,12 @@ document.getElementById("compare").addEventListener("click", () => {
     JSON.stringify(storedPokemonCompareNameList)
   );
 
-  
   showToast(`${storedPokemonName} has been added to the Compare Section`);
 });
 
 document
   .querySelector(".back")
   .addEventListener("click", () => (window.location.href = "../pokedex.html"));
-
 
 document.querySelector(".left").addEventListener("click", async () => {
   const storedPokemonName = sessionStorage.getItem("pokemonName");
@@ -553,11 +529,10 @@ document.querySelector(".left").addEventListener("click", async () => {
 
   if (previousPokemonName) {
     sessionStorage.setItem("pokemonName", previousPokemonName);
-    fetchPkmn(); 
+    fetchPkmn();
   } else {
   }
 });
-
 
 document.querySelector(".right").addEventListener("click", async () => {
   const storedPokemonName = sessionStorage.getItem("pokemonName");
@@ -568,7 +543,7 @@ document.querySelector(".right").addEventListener("click", async () => {
 
   if (nextPokemonName) {
     sessionStorage.setItem("pokemonName", nextPokemonName);
-    fetchPkmn(); 
+    fetchPkmn();
   } else {
   }
 });
@@ -588,7 +563,7 @@ closeMenu.addEventListener("click", () => {
 const fetchPkmn = async () => {
   storedPokemonName = sessionStorage.getItem("pokemonName");
 
-  showLoader(); 
+  showLoader();
   const [
     generationNumber,
     colorName,
@@ -612,10 +587,10 @@ const fetchPkmn = async () => {
       names,
       speciesName,
       genderRate
-    ); 
+    );
     displayPokemonEffectives(storedPokemonName);
   } else {
-    hideLoader(); 
+    hideLoader();
   }
 };
 

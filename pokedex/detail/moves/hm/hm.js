@@ -1,6 +1,9 @@
 import rgbaColors from "../../../../utils/rgbaColors.js";
 import rgbaColorsForScrollbar from "../../../../utils/rgbaColorsForScrollbar.js";
 
+const storedPokemonName = sessionStorage.getItem("pokemonName");
+const storedPkmnColor = sessionStorage.getItem("pkmnColor");
+
 const hmMovesContainer = document.getElementById("moves");
 const backbtn = document.querySelector(".back");
 const faSolid = document.querySelectorAll(".fa-solid");
@@ -8,19 +11,13 @@ const loader = document.getElementById("loader");
 const mainContainer = document.querySelector(".container");
 const openMenu = document.getElementById("open-menu");
 const menuList = document.getElementById("menu-list");
+menuList.style.border = `0.3rem ridge ${storedPkmnColor}`;
 const closeMenu = document.getElementById("close-menu");
-
-
-
-const storedPokemonName = sessionStorage.getItem("pokemonName");
-const storedPkmnColor = sessionStorage.getItem("pkmnColor");
-
 
 function showLoader() {
   loader.style.visibility = "visible";
   mainContainer.style.visibility = "hidden";
 }
-
 
 function hideLoader() {
   loader.style.visibility = "hidden";
@@ -34,7 +31,6 @@ for (let btn of document.getElementsByTagName("button")) {
   btn.style.background = rgbaColors[storedPkmnColor];
   btn.style.textShadow = `0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}`;
 }
-
 
 async function fetchPokemonMachineMoves(pokemonName) {
   try {
@@ -59,10 +55,8 @@ async function fetchPokemonMachineMoves(pokemonName) {
       "dive",
     ];
 
-    
-
     const machineData = machineMoves
-      .filter((move) => hmMovesName.includes(move.move.name)) 
+      .filter((move) => hmMovesName.includes(move.move.name))
       .map((move) => move.move.name);
     const number = [];
     for (let i = 0; i < machineData.length; i++) {
@@ -75,14 +69,11 @@ async function fetchPokemonMachineMoves(pokemonName) {
   }
 }
 
-
 async function displayHmMoves(pokemonName) {
-  
   for (let fa of faSolid) {
     fa.style.textShadow = `0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}`;
   }
 
-  
   hmMovesContainer.style.setProperty(
     "--scrollbar-thumb-color",
     storedPkmnColor
@@ -92,10 +83,8 @@ async function displayHmMoves(pokemonName) {
     rgbaColorsForScrollbar[storedPkmnColor]
   );
 
-  
   const [machineMoves, id] = await fetchPokemonMachineMoves(pokemonName);
 
-  
   let hmMovesHtml = "";
 
   for (let i = 0; i < machineMoves.length; i++) {
@@ -147,7 +136,6 @@ async function displayHmMoves(pokemonName) {
     }
   }
 
-  
   hmMovesHtml
     ? (hmMovesContainer.innerHTML = hmMovesHtml)
     : (hmMovesContainer.innerHTML = "This POKÉMON cannot learn TM moves.");
@@ -182,12 +170,12 @@ hmMovesContainer.addEventListener("click", (event) => {
 });
 
 (async () => {
-  showLoader(); 
+  showLoader();
 
   if (storedPokemonName) {
     await displayHmMoves(storedPokemonName);
-    hideLoader(); 
+    hideLoader();
   } else {
-    hideLoader(); 
+    hideLoader();
   }
 })();

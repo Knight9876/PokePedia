@@ -1,6 +1,9 @@
 import rgbaColors from "../../../../utils/rgbaColors.js";
 import rgbaColorsForScrollbar from "../../../../utils/rgbaColorsForScrollbar.js";
 
+const storedPokemonName = sessionStorage.getItem("pokemonName");
+const storedPkmnColor = sessionStorage.getItem("pkmnColor");
+
 const tmMovesContainer = document.getElementById("moves");
 const backbtn = document.querySelector(".back");
 const faSolid = document.querySelectorAll(".fa-solid");
@@ -8,10 +11,8 @@ const loader = document.getElementById("loader");
 const mainContainer = document.querySelector(".container");
 const openMenu = document.getElementById("open-menu");
 const menuList = document.getElementById("menu-list");
+menuList.style.border = `0.3rem ridge ${storedPkmnColor}`;
 const closeMenu = document.getElementById("close-menu");
-
-const storedPokemonName = sessionStorage.getItem("pokemonName");
-const storedPkmnColor = sessionStorage.getItem("pkmnColor");
 
 function showLoader() {
   loader.style.visibility = "visible";
@@ -111,33 +112,55 @@ async function displayTmMoves(pokemonName) {
     fa.style.textShadow = `0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}`;
   }
 
-  tmMovesContainer.style.setProperty("--scrollbar-thumb-color", storedPkmnColor);
-  tmMovesContainer.style.setProperty("--scrollbar-track-color", rgbaColorsForScrollbar[storedPkmnColor]);
+  tmMovesContainer.style.setProperty(
+    "--scrollbar-thumb-color",
+    storedPkmnColor
+  );
+  tmMovesContainer.style.setProperty(
+    "--scrollbar-track-color",
+    rgbaColorsForScrollbar[storedPkmnColor]
+  );
 
   const allMachinesPromise = fetchAllMachines();
   const tmMovesPromise = fetchPokemonTmMoves(pokemonName);
 
   try {
-    const [allMachines, tmMoves] = await Promise.all([allMachinesPromise, tmMovesPromise]);
+    const [allMachines, tmMoves] = await Promise.all([
+      allMachinesPromise,
+      tmMovesPromise,
+    ]);
     const tmMovesWithNumbers = await fetchTmNumbers(tmMoves, allMachines);
 
-    const tmMovesHtml = tmMovesWithNumbers.map((move) => {
-      const boxShadowSize = storedPkmnColor === "yellow" ? "3px" : storedPkmnColor === "white" ? "2px" : "5px";
-      return `
-        <div class="move-container" style="border: 0.3rem ridge ${storedPkmnColor}; box-shadow: 0px 0px 10px ${storedPkmnColor}, 0px 0px 10px ${storedPkmnColor}; background: ${rgbaColors[storedPkmnColor]};">
-          <p class="move-number" style="text-shadow: 0px 0px ${boxShadowSize} ${storedPkmnColor}, 0px 0px ${boxShadowSize} ${storedPkmnColor}, 0px 0px ${boxShadowSize} ${storedPkmnColor}, 0px 0px ${boxShadowSize} ${storedPkmnColor};">TM ${move.tmNumber}</p>
-          <p class="move-name" style="text-shadow: 0px 0px ${boxShadowSize} ${storedPkmnColor}, 0px 0px ${boxShadowSize} ${storedPkmnColor}, 0px 0px ${boxShadowSize} ${storedPkmnColor}, 0px 0px ${boxShadowSize} ${storedPkmnColor};">${move.name.includes("-o-") ? move.name : move.name.split("-").join(" ")}</p>
+    const tmMovesHtml = tmMovesWithNumbers
+      .map((move) => {
+        const boxShadowSize =
+          storedPkmnColor === "yellow"
+            ? "3px"
+            : storedPkmnColor === "white"
+            ? "2px"
+            : "5px";
+        return `
+        <div class="move-container" style="border: 0.3rem ridge ${storedPkmnColor}; box-shadow: 0px 0px 10px ${storedPkmnColor}, 0px 0px 10px ${storedPkmnColor}; background: ${
+          rgbaColors[storedPkmnColor]
+        };">
+          <p class="move-number" style="text-shadow: 0px 0px ${boxShadowSize} ${storedPkmnColor}, 0px 0px ${boxShadowSize} ${storedPkmnColor}, 0px 0px ${boxShadowSize} ${storedPkmnColor}, 0px 0px ${boxShadowSize} ${storedPkmnColor};">TM ${
+          move.tmNumber
+        }</p>
+          <p class="move-name" style="text-shadow: 0px 0px ${boxShadowSize} ${storedPkmnColor}, 0px 0px ${boxShadowSize} ${storedPkmnColor}, 0px 0px ${boxShadowSize} ${storedPkmnColor}, 0px 0px ${boxShadowSize} ${storedPkmnColor};">${
+          move.name.includes("-o-") ? move.name : move.name.split("-").join(" ")
+        }</p>
         </div>
       `;
-    }).join("");
+      })
+      .join("");
 
-    tmMovesContainer.innerHTML = tmMovesHtml || "This POKÉMON cannot learn TM moves.";
+    tmMovesContainer.innerHTML =
+      tmMovesHtml || "This POKÉMON cannot learn TM moves.";
   } catch (error) {
     console.error("Error displaying TM moves:", error);
     tmMovesContainer.innerHTML = "Failed to fetch TM moves.";
   }
 }
-
 
 openMenu.addEventListener("click", () => {
   menuList.classList.toggle("show");

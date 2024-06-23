@@ -18,6 +18,7 @@ const popUp = document.getElementById("pop-up");
 const popUpWindow = document.getElementById("pop-up-window");
 const openMenu = document.getElementById("open-menu");
 const menuList = document.getElementById("menu-list");
+menuList.style.border = `0.3rem ridge ${storedPkmnColor}`
 const closeMenu = document.getElementById("close-menu");
 const backbtn = document.querySelector(".back");
 

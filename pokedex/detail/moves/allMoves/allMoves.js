@@ -1,6 +1,10 @@
 import rgbaColors from "../../../../utils/rgbaColors.js";
 import rgbaColorsForScrollbar from "../../../../utils/rgbaColorsForScrollbar.js";
 
+const storedPokemonName = sessionStorage.getItem("pokemonName");
+let storedPkmnColor = sessionStorage.getItem("pkmnColor");
+storedPkmnColor ? storedPkmnColor : (storedPkmnColor = "white");
+
 const allMovesContainer = document.getElementById("moves");
 const backbtn = document.querySelector(".back");
 const faSolid = document.querySelectorAll(".fa-solid");
@@ -8,20 +12,13 @@ const loader = document.getElementById("loader");
 const mainContainer = document.querySelector(".container");
 const openMenu = document.getElementById("open-menu");
 const menuList = document.getElementById("menu-list");
+menuList.style.border = `0.3rem ridge ${storedPkmnColor}`;
 const closeMenu = document.getElementById("close-menu");
-
-
-
-const storedPokemonName = sessionStorage.getItem("pokemonName");
-let storedPkmnColor = sessionStorage.getItem("pkmnColor");
-storedPkmnColor ? storedPkmnColor : storedPkmnColor = "white"
-
 
 function showLoader() {
   loader.style.visibility = "visible";
   mainContainer.style.visibility = "hidden";
 }
-
 
 function hideLoader() {
   loader.style.visibility = "hidden";
@@ -36,7 +33,6 @@ for (let btn of document.getElementsByTagName("button")) {
   btn.style.textShadow = `0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}`;
 }
 
-
 async function fetchPokemonData(pokemonName) {
   try {
     const response = await fetch(
@@ -49,7 +45,6 @@ async function fetchPokemonData(pokemonName) {
   }
 }
 
-
 async function fetchPokemonAllMoves(pokemonName) {
   try {
     const data = await fetchPokemonData(pokemonName);
@@ -58,7 +53,7 @@ async function fetchPokemonAllMoves(pokemonName) {
     const allMoves = data.moves.map((move) => move.move);
 
     return allMoves.map((move) => {
-      const moveNumber = move.url.split("/").slice(-2, -1)[0]; 
+      const moveNumber = move.url.split("/").slice(-2, -1)[0];
       return {
         name: move.name,
         moveNumber,
@@ -69,7 +64,6 @@ async function fetchPokemonAllMoves(pokemonName) {
     return [];
   }
 }
-
 
 async function displayAllMoves(pokemonName) {
   for (let fa of faSolid) {
@@ -158,22 +152,19 @@ allMovesContainer.addEventListener("click", (event) => {
   }
 });
 
-allMovesContainer.style.setProperty(
-  "--scrollbar-thumb-color",
-  storedPkmnColor
-);
+allMovesContainer.style.setProperty("--scrollbar-thumb-color", storedPkmnColor);
 allMovesContainer.style.setProperty(
   "--scrollbar-track-color",
   rgbaColorsForScrollbar[storedPkmnColor]
 );
 
 (async () => {
-  showLoader(); 
+  showLoader();
 
   if (storedPokemonName) {
     await displayAllMoves(storedPokemonName);
-    hideLoader(); 
+    hideLoader();
   } else {
-    hideLoader(); 
+    hideLoader();
   }
 })();

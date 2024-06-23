@@ -1,5 +1,8 @@
 import rgbaColors from "../../../../utils/rgbaColors.js";
 
+const storedPokemonName = sessionStorage.getItem("pokemonName");
+const storedPkmnColor = sessionStorage.getItem("pkmnColor");
+
 const movesContainer = document.getElementById("moves");
 const backbtn = document.querySelector(".back");
 const faSolid = document.querySelectorAll(".fa-solid");
@@ -7,19 +10,14 @@ const loader = document.getElementById("loader");
 const mainContainer = document.querySelector(".container");
 const openMenu = document.getElementById("open-menu");
 const menuList = document.getElementById("menu-list");
+menuList.style.border = `0.3rem ridge ${storedPkmnColor}`;
 const closeMenu = document.getElementById("close-menu");
-const infoDiv = document.querySelector(".info-div")
-
-
-const storedPokemonName = sessionStorage.getItem("pokemonName");
-const storedPkmnColor = sessionStorage.getItem("pkmnColor")
-
+const infoDiv = document.querySelector(".info-div");
 
 function showLoader() {
   loader.style.visibility = "visible";
   mainContainer.style.visibility = "hidden";
 }
-
 
 function hideLoader() {
   loader.style.visibility = "hidden";
@@ -33,7 +31,6 @@ for (let btn of document.getElementsByTagName("button")) {
   btn.style.background = rgbaColors[storedPkmnColor];
   btn.style.textShadow = `0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}`;
 }
-
 
 async function fetchPokemonLevelUpMoves(pokemonName) {
   try {
@@ -54,16 +51,14 @@ async function fetchPokemonLevelUpMoves(pokemonName) {
           (detail) => detail.move_learn_method.name === "level-up"
         ).level_learned_at,
       }))
-      .sort((a, b) => a.level - b.level); 
+      .sort((a, b) => a.level - b.level);
   } catch (error) {
     console.error("Error fetching Pokémon level-up moves:", error);
     return [];
   }
 }
 
-
 async function displayLevelUpMoves(pokemonName) {
-
   for (let fa of faSolid) {
     fa.style.textShadow = `0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}`;
   }
@@ -137,8 +132,10 @@ closeMenu.addEventListener("click", () => {
   closeMenu.style.visibility = "hidden";
 });
 
-backbtn.addEventListener("click", () => window.location.href = "../moves.html");
-
+backbtn.addEventListener(
+  "click",
+  () => (window.location.href = "../moves.html")
+);
 
 movesContainer.addEventListener("click", (event) => {
   if (event.target.tagName === "P") {
@@ -152,12 +149,12 @@ movesContainer.addEventListener("click", (event) => {
 });
 
 (async () => {
-  showLoader(); 
+  showLoader();
 
   if (storedPokemonName) {
     await displayLevelUpMoves(storedPokemonName);
-    hideLoader(); 
+    hideLoader();
   } else {
-    hideLoader(); 
+    hideLoader();
   }
 })();

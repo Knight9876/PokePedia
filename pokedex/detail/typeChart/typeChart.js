@@ -10,6 +10,7 @@ const type = document.querySelectorAll(".type")
 const h1 = document.getElementsByTagName("h3")
 const openMenu = document.getElementById("open-menu");
 const menuList = document.getElementById("menu-list");
+menuList.style.border = `0.3rem ridge ${storedPkmnColor}`
 const closeMenu = document.getElementById("close-menu");
 const faSolid = document.querySelectorAll(".fa-solid");
 const pokemonName = document.getElementById("pokemon-name")

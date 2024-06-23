@@ -1,5 +1,8 @@
 import rgbaColors from "../../../utils/rgbaColors.js";
 
+let storedPokemonName = sessionStorage.getItem("pokemonName");
+const storedPkmnColor = sessionStorage.getItem("pkmnColor");
+
 const pkmnEvo = document.getElementById("pkmn-evo");
 const backbtn = document.querySelector(".back");
 const faSolid = document.querySelectorAll(".fa-solid");
@@ -7,11 +10,8 @@ const loader = document.getElementById("loader");
 const mainContainer = document.querySelector(".main-container");
 const openMenu = document.getElementById("open-menu");
 const menuList = document.getElementById("menu-list");
+menuList.style.border = `0.3rem ridge ${storedPkmnColor}`;
 const closeMenu = document.getElementById("close-menu");
-
-
-let storedPokemonName = sessionStorage.getItem("pokemonName");
-const storedPkmnColor = sessionStorage.getItem("pkmnColor");
 
 for (let btn of document.getElementsByTagName("button")) {
   btn.style.border = `0.3rem ridge ${
@@ -21,18 +21,15 @@ for (let btn of document.getElementsByTagName("button")) {
   btn.style.textShadow = `0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}`;
 }
 
-
 function showLoader() {
   loader.style.visibility = "visible";
   mainContainer.style.visibility = "hidden";
 }
 
-
 function hideLoader() {
   loader.style.visibility = "hidden";
   mainContainer.style.visibility = "visible";
 }
-
 
 async function fetchPokemonEvolutionAndForms(pokemonName) {
   try {
@@ -46,7 +43,6 @@ async function fetchPokemonEvolutionAndForms(pokemonName) {
     return [null, []];
   }
 }
-
 
 async function fetchEvolutionLine(evolutionChainUrl) {
   try {
@@ -74,7 +70,6 @@ async function fetchEvolutionLine(evolutionChainUrl) {
     return [];
   }
 }
-
 
 async function fetchForms(pokemonName) {
   try {
@@ -127,7 +122,6 @@ async function fetchFormHtml(variety) {
   }
 }
 
-
 async function displayEvolutionLineAndForms(evolutionChainUrl) {
   for (let fa of faSolid) {
     fa.style.textShadow = `0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}, 0px 0px 15px ${storedPkmnColor}`;
@@ -135,7 +129,6 @@ async function displayEvolutionLineAndForms(evolutionChainUrl) {
 
   const evoChain = await fetchEvolutionLine(evolutionChainUrl);
 
-  
   const mainFormsHtml = await Promise.all(
     evoChain.map(async (evo) => {
       const forms = await fetchForms(evo.species_name);
@@ -143,7 +136,6 @@ async function displayEvolutionLineAndForms(evolutionChainUrl) {
     })
   );
 
-  
   const alternateFormsHtml = await Promise.all(
     evoChain.map(async (evo) => {
       const forms = await fetchForms(evo.species_name);
@@ -151,10 +143,8 @@ async function displayEvolutionLineAndForms(evolutionChainUrl) {
     })
   );
 
-  
   pkmnEvo.innerHTML = mainFormsHtml.join("") + alternateFormsHtml.join("");
 }
-
 
 pkmnEvo.addEventListener("click", (event) => {
   if (event.target.tagName === "IMG") {
@@ -182,15 +172,15 @@ closeMenu.addEventListener("click", () => {
 });
 
 (async () => {
-  showLoader(); 
+  showLoader();
   const [evolutionChainUrl, _] = await fetchPokemonEvolutionAndForms(
     storedPokemonName
   );
 
   if (storedPokemonName && evolutionChainUrl) {
     await displayEvolutionLineAndForms(evolutionChainUrl);
-    hideLoader(); 
+    hideLoader();
   } else {
-    hideLoader(); 
+    hideLoader();
   }
 })();
