@@ -2,28 +2,24 @@ import rgbaColors from "../../utils/rgbaColors.js";
 import damageDealt from "../../utils/damageDealt.js";
 import damageTaken from "../../utils/damageTaken.js";
 
-function handlePokemonNameInURL() {
-  let url = window.location.href;
-
-  if (url.includes(parameter)) {
-    console.log('URL with parameter:', url);
-  } else {
-    const originUrl = window.location.origin;
-    console.log('URL without parameter, using origin URL:', originUrl);
-    window.location.href = originUrl;
+document.addEventListener('DOMContentLoaded', function() {
+  // Function to get URL parameter by name
+  function getParameterByName(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
   }
 
-  const regex = /\/name=([^&]+)/;
-  const match = url.match(regex);
+  // Get the Pokémon name from the URL parameter
+  const pokemonName = getParameterByName('pokemonName');
 
-  if (match && match[1]) {
-    const pokemonName = match[1];
+  if (pokemonName) {
+    // Store the Pokémon name in sessionStorage
     sessionStorage.setItem('pokemonName', pokemonName);
-    url = url.replace(regex, '');
-    window.history.replaceState(null, '', url);
-    window.location.reload();
+
+    // Optionally, handle the Pokémon name (e.g., display it or process it further)
+    console.log('Pokemon Name:', pokemonName);
   }
-}
+});
 
 const openMenu = document.getElementById("open-menu");
 const menuList = document.getElementById("menu-list");
@@ -617,5 +613,4 @@ const fetchPkmn = async () => {
   }
 };
 
-document.addEventListener('DOMContentLoaded', handlePokemonNameInURL);
 fetchPkmn();
