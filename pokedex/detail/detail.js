@@ -4,6 +4,7 @@ import damageTaken from "../../utils/damageTaken.js";
 
 function handlePokemonNameInURL() {
   let url = window.location.href;
+  window.location.href = "https://pediapokepedia.netlify.app
 
   const regex = /\/name=([^&]+)/;
   const match = url.match(regex);
