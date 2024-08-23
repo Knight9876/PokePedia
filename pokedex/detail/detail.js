@@ -610,5 +610,5 @@ const fetchPkmn = async () => {
   }
 };
 
-handlePokemonNameInURL(0
+handlePokemonNameInURL()
 fetchPkmn();
