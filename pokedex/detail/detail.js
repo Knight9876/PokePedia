@@ -2,6 +2,13 @@ import rgbaColors from "../../utils/rgbaColors.js";
 import damageDealt from "../../utils/damageDealt.js";
 import damageTaken from "../../utils/damageTaken.js";
 
+window.addEventListener('message', (event) => {
+  if (event.origin === 'https://pediapokepedia.netlify.app') {
+    const { pokemonName } = event.data;
+    sessionStorage.setItem('pokemonName', pokemonName);
+  }
+});
+
 const openMenu = document.getElementById("open-menu");
 const menuList = document.getElementById("menu-list");
 const closeMenu = document.getElementById("close-menu");
