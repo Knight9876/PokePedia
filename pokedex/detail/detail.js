@@ -610,5 +610,5 @@ const fetchPkmn = async () => {
   }
 };
 
-handlePokemonNameInURL()
+document.addEventListener('DOMContentLoaded', handlePokemonNameInURL);
 fetchPkmn();
