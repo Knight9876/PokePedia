@@ -3,22 +3,15 @@ import damageDealt from "../../utils/damageDealt.js";
 import damageTaken from "../../utils/damageTaken.js";
 
 document.addEventListener('DOMContentLoaded', function() {
-  // Function to get URL parameter by name
   function getParameterByName(name) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(name);
   }
-
-  // Get the Pokémon name from the URL parameter
   const pokemonName = getParameterByName('pokemonName');
-  console.log(pokemonName)
 
   if (pokemonName) {
-    // Store the Pokémon name in sessionStorage
     sessionStorage.setItem('pokemonName', pokemonName);
-
-    // Optionally, handle the Pokémon name (e.g., display it or process it further)
-    console.log('Pokemon Name:', pokemonName);
+    window.location.reload()
   }
 });
 
