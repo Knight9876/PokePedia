@@ -2,12 +2,20 @@ import rgbaColors from "../../utils/rgbaColors.js";
 import damageDealt from "../../utils/damageDealt.js";
 import damageTaken from "../../utils/damageTaken.js";
 
-window.addEventListener('message', (event) => {
-  if (event.origin === 'https://pediapokepedia.netlify.app') {
-    const { pokemonName } = event.data;
+function handlePokemonNameInURL() {
+  let url = window.location.href;
+
+  const regex = /\/name=([^&]+)/;
+  const match = url.match(regex);
+
+  if (match && match[1]) {
+    const pokemonName = match[1];
     sessionStorage.setItem('pokemonName', pokemonName);
+    url = url.replace(regex, '');
+    window.history.replaceState(null, '', url);
+    window.location.reload();
   }
-});
+}
 
 const openMenu = document.getElementById("open-menu");
 const menuList = document.getElementById("menu-list");
@@ -601,4 +609,5 @@ const fetchPkmn = async () => {
   }
 };
 
+handlePokemonNameInURL(0
 fetchPkmn();
