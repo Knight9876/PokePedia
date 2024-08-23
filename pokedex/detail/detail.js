@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Get the Pokémon name from the URL parameter
   const pokemonName = getParameterByName('pokemonName');
+  console.log(pokemonName)
 
   if (pokemonName) {
     // Store the Pokémon name in sessionStorage
