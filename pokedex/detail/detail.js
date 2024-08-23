@@ -7,13 +7,29 @@ document.addEventListener('DOMContentLoaded', function() {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(name);
   }
+
+  function removeParameterFromUrl(paramName) {
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.delete(paramName);
+
+    // Construct the new URL without the parameter
+    const newUrl = window.location.origin + window.location.pathname + (urlParams.toString() ? `?${urlParams.toString()}` : '');
+
+    // Update the URL in the browser without reloading
+    window.history.replaceState({}, '', newUrl);
+  }
+
   const pokemonName = getParameterByName('pokemonName');
 
   if (pokemonName) {
     sessionStorage.setItem('pokemonName', pokemonName);
-    window.location.reload()
+    removeParameterFromUrl('pokemonName');
+
+    // Optionally reload the page if needed
+    window.location.reload();
   }
 });
+
 
 const openMenu = document.getElementById("open-menu");
 const menuList = document.getElementById("menu-list");
